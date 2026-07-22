@@ -1,9 +1,15 @@
+import { Hero } from '../components/home/Hero';
+import { ShowsCarousel } from '../components/home/ShowsCarousel';
+import { AboutStats } from '../components/home/AboutStats';
+import { ContactSection } from '../components/home/ContactSection';
+
 export function HomePage() {
   return (
     <div className="page-content">
-      <div className="container" style={{ paddingTop: '8rem' }}>
-        <h1>Home page — under construction</h1>
-      </div>
+      <Hero />
+      <ShowsCarousel />
+      <AboutStats />
+      <ContactSection />
     </div>
   );
 }
