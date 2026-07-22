@@ -1,0 +1,127 @@
+.episodes-panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: var(--z-modal);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.episodes-panel {
+  width: min(420px, 100vw);
+  height: 100%;
+  background: var(--color-bg-elevated);
+  border-left: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  animation: episodes-panel-in var(--transition-normal);
+}
+
+@keyframes episodes-panel-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.episodes-panel__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.episodes-panel__image {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.episodes-panel__header h3 {
+  font-size: 1.1rem;
+}
+
+.episodes-panel__header p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.episodes-panel__close {
+  margin-left: auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.episodes-panel__list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-sm);
+}
+
+.episodes-panel__empty {
+  padding: var(--space-2xl) var(--space-md);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.episode-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: background var(--transition-fast);
+}
+
+.episode-row:hover {
+  background: var(--color-surface-hover);
+}
+
+.episode-row--active {
+  background: rgba(255, 77, 109, 0.12);
+}
+
+.episode-row__play {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  font-size: 0.85rem;
+}
+
+.episode-row--active .episode-row__play {
+  background: var(--gradient-sunset);
+  color: #1a0a10;
+}
+
+.episode-row__meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.episode-row__title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.episode-row__sub {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}

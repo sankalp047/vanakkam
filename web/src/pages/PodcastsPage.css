@@ -1,0 +1,15 @@
+.podcasts-page {
+  padding-top: 7rem;
+  min-height: 100svh;
+}
+
+.podcasts-page__header {
+  margin-bottom: var(--space-xl);
+  text-align: left;
+  max-width: 640px;
+}
+
+.podcasts-page__status {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
