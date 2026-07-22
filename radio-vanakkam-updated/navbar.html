@@ -1,0 +1,98 @@
+<!-- ========================================
+     RADIO VANAKKAM - NAVBAR COMPONENT
+     ========================================
+     
+     Usage Instructions:
+     ------------------
+     This is a reusable navbar component. To use it in your pages:
+     
+     Option 1: JavaScript Include
+     ----------------------------
+     Add this script at the end of your body:
+     <script>
+         fetch('components/navbar.html')
+             .then(response => response.text())
+             .then(html => {
+                 document.getElementById('navbar-placeholder').innerHTML = html;
+             });
+     </script>
+     And add: <div id="navbar-placeholder"></div> where you want the navbar
+     
+     Option 2: Server-Side Include (PHP)
+     ------------------------------------
+     <?php include 'components/navbar.html'; ?>
+     
+     Option 3: Template Engine (EJS, Handlebars, etc.)
+     -------------------------------------------------
+     <%- include('components/navbar') %>
+     
+     Option 4: Build Tool (Webpack, Vite, etc.)
+     ------------------------------------------
+     import navbar from './components/navbar.html?raw';
+     
+     ======================================== -->
+
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <!-- Logo -->
+        <a href="#" class="nav-logo">
+            <img src="img/logo.png" alt="Radio Vanakkam Logo" class="nav-logo-img">
+        </a>
+        
+        <!-- Navigation Menu -->
+        <ul class="nav-menu" id="nav-menu">
+            <li class="nav-item">
+                <a href="#home" class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#shows" class="nav-link">Shows</a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact" class="nav-link">Contact Us</a>
+            </li>
+        </ul>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+            <span class="hamburger"></span>
+        </button>
+    </div>
+</nav>
+
+<!-- 
+     NAVBAR STYLES
+     =============
+     The navbar requires the following CSS classes to be defined:
+     
+     - .navbar: Main navbar container (fixed positioning)
+     - .navbar.scrolled: Styles when page is scrolled
+     - .nav-container: Inner container with max-width
+     - .nav-logo: Logo styling
+     - .logo-icon: Logo icon (emoji/image)
+     - .logo-text: Logo text
+     - .highlight: Accent color for text
+     - .nav-menu: Navigation links container
+     - .nav-item: Individual menu item
+     - .nav-link: Navigation link styling
+     - .nav-link.active: Active state styling
+     - .live-btn: Live radio button
+     - .pulse: Animated pulse indicator
+     - .nav-toggle: Mobile menu toggle button
+     - .hamburger: Hamburger icon lines
+     - .nav-toggle.active .hamburger: Transformed hamburger (X shape)
+     
+     See css/styles.css for full implementation.
+-->
+
+<!--
+     NAVBAR JAVASCRIPT
+     =================
+     The navbar requires the following JavaScript functionality:
+     
+     1. Scroll handler to add/remove 'scrolled' class
+     2. Mobile menu toggle functionality
+     3. Active link highlighting based on scroll position
+     4. Smooth scroll to sections on click
+     
+     See js/main.js for full implementation.
+-->

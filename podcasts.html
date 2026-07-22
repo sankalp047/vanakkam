@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Shows | Radio Vanakkam</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --primary-dark: #E85A2A;
+            --primary-light: #FF8F66;
+            --secondary: #1A1A2E;
+            --secondary-light: #252542;
+            --accent: #FFD93D;
+            --accent-glow: rgba(255, 217, 61, 0.3);
+            --bg-dark: #0D0D1A;
+            --bg-card: #16162A;
+            --bg-card-hover: #1E1E38;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0B8;
+            --text-muted: #6B6B80;
+            --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #FF8F66 50%, #FFD93D 100%);
+            --gradient-dark: linear-gradient(180deg, #1A1A2E 0%, #0D0D1A 100%);
+            --shadow-glow: 0 0 40px rgba(255, 107, 53, 0.3);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(13, 13, 26, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition-medium);
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 13, 26, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-logo-img {
+            height: 44px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            position: relative;
+            transition: var(--transition-fast);
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: var(--transition-fast);
+        }
+
+        .hamburger::before { top: -8px; }
+        .hamburger::after { bottom: -8px; }
+
+        .nav-toggle.active .hamburger {
+            background: transparent;
+        }
+
+        .nav-toggle.active .hamburger::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        .nav-toggle.active .hamburger::after {
+            bottom: 0;
+            transform: rotate(-45deg);
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            
+            .nav-menu {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: rgba(13, 13, 26, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 4px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition-medium);
+            }
+            
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 14px 20px;
+            }
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            padding-top: 72px;
+            min-height: calc(100vh - 72px);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero-section {
+            position: relative;
+            padding: 60px 24px 40px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 0%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 100%, rgba(255, 217, 61, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 107, 53, 0.15);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .hero-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .hero-title .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.6;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== RJ GRID ========== */
+        .shows-section {
+            padding: 0 24px 60px;
+        }
+
+        .shows-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+        }
+
+        .rj-count {
+            background: var(--bg-card);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .rj-count span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .rj-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .rj-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition-medium);
+            border: 1px solid transparent;
+            position: relative;
+        }
+
+        .rj-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-lg);
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0) 0%, rgba(255, 107, 53, 0) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            transition: var(--transition-medium);
+        }
+
+        .rj-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .rj-card:hover::before {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.5) 0%, rgba(255, 217, 61, 0.5) 100%);
+        }
+
+        .rj-card.active {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .rj-card.active::before {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        .rj-image-wrapper {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .rj-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-slow);
+        }
+
+        .rj-card:hover .rj-image {
+            transform: scale(1.05);
+        }
+
+        .rj-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13, 13, 26, 0.95) 0%, rgba(13, 13, 26, 0.3) 50%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .rj-info {
+            width: 100%;
+        }
+
+        .rj-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .rj-time {
+            font-size: 0.9rem;
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rj-time svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .rj-meta {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .rj-episodes {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .rj-episodes span {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .rj-play-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .rj-card:hover .rj-play-icon {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .rj-play-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+            margin-left: 2px;
+        }
+
+        /* ========== EPISODES PANEL ========== */
+        .episodes-panel {
+            position: fixed;
+            top: 72px;
+            right: -480px;
+            width: 100%;
+            max-width: 480px;
+            height: calc(100vh - 72px - 90px);
+            background: var(--bg-card);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 900;
+            transition: var(--transition-medium);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .episodes-panel.active {
+            right: 0;
+            box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .panel-header {
+            padding: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+
+        .panel-close {
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+            flex-shrink: 0;
+        }
+
+        .panel-close:hover {
+            background: rgba(255, 107, 53, 0.2);
+        }
+
+        .panel-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-secondary);
+        }
+
+        .panel-rj-info {
+            flex: 1;
+        }
+
+        .panel-rj-image {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .panel-rj-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .panel-rj-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .episodes-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .episodes-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .episodes-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .episodes-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .episode-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            border: 1px solid transparent;
+        }
+
+        .episode-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 107, 53, 0.3);
+        }
+
+        .episode-card.playing {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: var(--primary);
+        }
+
+        .episode-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .episode-play-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+            flex-shrink: 0;
+        }
+
+        .episode-play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .episode-play-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+        }
+
+        .episode-play-btn .play-icon {
+            margin-left: 2px;
+        }
+
+        .episode-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .episode-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .episode-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .episode-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .episode-meta svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .episode-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ========== OVERLAY ========== */
+        .panel-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 850;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-medium);
+        }
+
+        .panel-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ========== MUSIC PLAYER ========== */
+        .music-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            transform: translateY(100%);
+            transition: var(--transition-medium);
+        }
+
+        .music-player.active {
+            transform: translateY(0);
+        }
+
+        .music-player.expanded {
+            height: auto;
+            max-height: 90vh;
+        }
+
+        .player-collapsed {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 20px;
+        }
+
+        .player-expand-btn {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 20px;
+            background: var(--secondary);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: none;
+            border-radius: 20px 20px 0 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .player-expand-btn:hover {
+            background: var(--secondary-light);
+        }
+
+        .player-expand-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--text-secondary);
+            transition: var(--transition-fast);
+        }
+
+        .music-player.expanded .player-expand-btn svg {
+            transform: rotate(180deg);
+        }
+
+        .player-artwork {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .player-artwork img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .player-artwork .playing-animation {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            opacity: 0;
+            transition: var(--transition-fast);
+        }
+
+        .music-player.playing .player-artwork .playing-animation {
+            opacity: 1;
+        }
+
+        .playing-animation span {
+            width: 3px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 2px;
+            animation: soundwave 0.5s ease infinite alternate;
+        }
+
+        .playing-animation span:nth-child(2) { animation-delay: 0.1s; }
+        .playing-animation span:nth-child(3) { animation-delay: 0.2s; }
+        .playing-animation span:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes soundwave {
+            from { height: 8px; }
+            to { height: 24px; }
+        }
+
+        .player-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .player-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-artist {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .player-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .player-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .player-btn.play-pause {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+        }
+
+        .player-btn.play-pause:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .player-btn.play-pause svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .player-progress-wrapper {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .player-progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player-progress-bar:hover {
+            height: 8px;
+        }
+
+        .player-progress {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s linear;
+            position: relative;
+        }
+
+        .player-progress::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: var(--transition-fast);
+        }
+
+        .player-progress-bar:hover .player-progress::after {
+            opacity: 1;
+        }
+
+        .player-times {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .player-volume {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Expanded Player */
+        .player-expanded-content {
+            display: none;
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .music-player.expanded .player-collapsed {
+            display: none;
+        }
+
+        .music-player.expanded .player-expanded-content {
+            display: block;
+        }
+
+        .expanded-artwork {
+            width: 280px;
+            height: 280px;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            margin: 0 auto 32px;
+            box-shadow: var(--shadow-card), 0 0 60px rgba(255, 107, 53, 0.2);
+            position: relative;
+        }
+
+        .expanded-artwork img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .expanded-info {
+            margin-bottom: 32px;
+        }
+
+        .expanded-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .expanded-artist {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .expanded-progress {
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+
+        .expanded-progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .expanded-progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .expanded-times {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .expanded-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .expanded-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition-fast);
+        }
+
+        .expanded-btn:hover {
+            color: var(--text-primary);
+            transform: scale(1.1);
+        }
+
+        .expanded-btn svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .expanded-btn.play-pause {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .expanded-btn.play-pause:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+        }
+
+        .expanded-btn.play-pause svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        .collapse-btn {
+            position: absolute;
+            top: 16px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .collapse-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .collapse-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-secondary);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            position: relative;
+            background: var(--secondary);
+            color: var(--text-primary);
+            padding-top: 40px;
+        }
+
+        .footer-wave {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            color: var(--secondary);
+        }
+
+        .footer-wave svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr;
+            gap: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-brand .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-brand .highlight {
+            color: var(--primary);
+        }
+
+        .footer-tagline {
+            font-family: 'Noto Sans Tamil', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 0;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-legal {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 1024px) {
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-links {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-links {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .episodes-panel {
+                max-width: 100%;
+            }
+
+            .player-progress-wrapper {
+                display: none;
+            }
+
+            .player-collapsed {
+                padding: 0 16px;
+                gap: 12px;
+            }
+
+            .player-artwork {
+                width: 50px;
+                height: 50px;
+            }
+
+            .player-volume {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== LOADING STATES ========== */
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 107, 53, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 60px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0.05) 25%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.05) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: var(--radius-md);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* ========== EMPTY STATE ========== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 24px;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            stroke: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="img/logo.png" alt="Radio Vanakkam Logo" class="nav-logo-img">
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">Shows</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact Us</a>
+                </li>
+            </ul>
+
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18V5l12-2v13"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                    On-Demand Podcasts
+                </div>
+                <h1 class="hero-title">Browse <span class="highlight">Shows</span></h1>
+                <p class="hero-subtitle">Catch up on your favorite RJ shows anytime. From morning motivation to late-night vibes, we've got you covered.</p>
+            </div>
+        </section>
+
+        <!-- Shows Section -->
+        <section class="shows-section">
+            <div class="shows-container">
+                <div class="section-header">
+                    <h2 class="section-title">Our Radio Jockeys</h2>
+                    <div class="rj-count"><span id="rj-total">10</span> Shows Available</div>
+                </div>
+
+                <div class="rj-grid" id="rj-grid">
+                    <!-- RJ cards will be populated here -->
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Episodes Panel (Slide-in) -->
+    <div class="panel-overlay" id="panel-overlay"></div>
+    <div class="episodes-panel" id="episodes-panel">
+        <div class="panel-header">
+            <button class="panel-close" id="panel-close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <img src="" alt="" class="panel-rj-image" id="panel-rj-image">
+            <div class="panel-rj-info">
+                <h3 class="panel-rj-name" id="panel-rj-name">RJ Name</h3>
+                <p class="panel-rj-desc" id="panel-rj-desc">Show description</p>
+            </div>
+        </div>
+        <div class="episodes-list" id="episodes-list">
+            <!-- Episodes will be populated here -->
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="music-player">
+        <button class="player-expand-btn" id="player-expand-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="18 15 12 9 6 15"/>
+            </svg>
+        </button>
+
+        <!-- Collapsed View -->
+        <div class="player-collapsed">
+            <div class="player-artwork">
+                <img src="" alt="" id="player-artwork-img">
+                <div class="playing-animation">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+            <div class="player-info">
+                <div class="player-title" id="player-title">Select a show to play</div>
+                <div class="player-artist" id="player-artist">Radio Vanakkam</div>
+            </div>
+            <div class="player-progress-wrapper">
+                <div class="player-progress-bar" id="progress-bar">
+                    <div class="player-progress" id="progress-fill"></div>
+                </div>
+                <div class="player-times">
+                    <span id="current-time">0:00</span>
+                    <span id="duration-time">0:00</span>
+                </div>
+            </div>
+            <div class="player-controls">
+                <button class="player-btn" id="prev-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="19 20 9 12 19 4 19 20"/>
+                        <line x1="5" y1="19" x2="5" y2="5"/>
+                    </svg>
+                </button>
+                <button class="player-btn play-pause" id="play-pause-btn">
+                    <svg class="play-icon" viewBox="0 0 24 24">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                </button>
+                <button class="player-btn" id="next-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 4 15 12 5 20 5 4"/>
+                        <line x1="19" y1="5" x2="19" y2="19"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="player-volume">
+                <button class="player-btn" id="volume-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                    </svg>
+                </button>
+                <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="80">
+            </div>
+        </div>
+
+        <!-- Expanded View -->
+        <div class="player-expanded-content">
+            <button class="collapse-btn" id="collapse-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"/>
+                </svg>
+            </button>
+            <div class="expanded-artwork">
+                <img src="" alt="" id="expanded-artwork-img">
+            </div>
+            <div class="expanded-info">
+                <h2 class="expanded-title" id="expanded-title">Select a show to play</h2>
+                <p class="expanded-artist" id="expanded-artist">Radio Vanakkam</p>
+            </div>
+            <div class="expanded-progress">
+                <div class="expanded-progress-bar" id="expanded-progress-bar">
+                    <div class="expanded-progress-fill" id="expanded-progress-fill"></div>
+                </div>
+                <div class="expanded-times">
+                    <span id="expanded-current-time">0:00</span>
+                    <span id="expanded-duration-time">0:00</span>
+                </div>
+            </div>
+            <div class="expanded-controls">
+                <button class="expanded-btn" id="expanded-prev-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="19 20 9 12 19 4 19 20"/>
+                        <line x1="5" y1="19" x2="5" y2="5"/>
+                    </svg>
+                </button>
+                <button class="expanded-btn play-pause" id="expanded-play-pause-btn">
+                    <svg class="play-icon" viewBox="0 0 24 24">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                </button>
+                <button class="expanded-btn" id="expanded-next-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 4 15 12 5 20 5 4"/>
+                        <line x1="19" y1="5" x2="19" y2="19"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-wave">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <path d="M0,40 C480,100 960,0 1440,60 L1440,100 L0,100 Z" fill="currentColor"></path>
+            </svg>
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo" style="display:flex;align-items:center;gap:12px;">
+                        <img src="img/logo.png" alt="Radio Vanakkam" style="height:44px;width:auto;display:block;" />
+                        <div>
+                            <div class="logo-text" style="line-height:1.1;">
+                                Radio <span class="highlight">Vanakkam</span>
+                            </div>
+                            <p class="footer-tagline" style="margin:6px 0 0;">
+                                உங்கள் இசை பயணம் இங்கே தொடங்குகிறது
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="footer-description" style="margin-top:14px;max-width:520px;">
+                        Dallas–Fort Worth's Tamil station — live RJs, nonstop hits, and culture that feels like home.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Station</h4>
+                        <ul>
+                            <li><span>104.9 HD2</span></li>
+                            <li><span>Dallas–Fort Worth</span></li>
+                            <li><span>Live 24/7</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><span>Studio: +1 (912) 345-6789</span></li>
+                            <li><span>Sales: +1 (912) 345-6789</span></li>
+                            <li><span>Email: hello@vanakkamfm.net</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Studio</h4>
+                        <ul>
+                            <li><span>6850 TPC Dr #108</span></li>
+                            <li><span>McKinney, TX 75070</span></li>
+                            <li><span>United States</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 Radio Vanakkam.</p>
+                <div class="footer-legal">
+                    <span class="footer-description">All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Audio Element -->
+    <audio id="audio-player" preload="metadata"></audio>
+
+    <script>
+        // ========== DATA ==========
+        const RJ_FEEDS = [
+            { name: 'RJ Malini', url: 'https://funasia-rss.streamguys1.com/funasia/rj-malini.json' },
+            { name: 'RJ Janani', url: 'https://funasia-rss.streamguys1.com/funasia/rj-janani.json' },
+            { name: 'RJ Zara', url: 'https://funasia-rss.streamguys1.com/funasia/rj-zara.json' },
+            { name: 'RJ Prabhu', url: 'https://funasia-rss.streamguys1.com/funasia/rj-prabhu.json' },
+            { name: 'RJ Gomathi', url: 'https://funasia-rss.streamguys1.com/funasia/rj-gomathi.json' },
+            { name: 'RJ Lingesh', url: 'https://funasia-rss.streamguys1.com/funasia/rj-lingesh.json' },
+            { name: 'RJ Ananth', url: 'https://funasia-rss.streamguys1.com/funasia/rj-ananth.json' },
+            { name: 'RJ Lucky', url: 'https://funasia-rss.streamguys1.com/funasia/rj-lucky.json' },
+            { name: 'RJ Mythri', url: 'https://funasia-rss.streamguys1.com/funasia/rj-mythri.json' },
+            { name: 'RJ Raksha', url: 'https://funasia-rss.streamguys1.com/funasia/rj-raksha.json' }
+        ];
+
+        let rjData = [];
+        let currentRJ = null;
+        let currentEpisode = null;
+        let currentEpisodeIndex = 0;
+        let isPlaying = false;
+        let isExpanded = false;
+
+        // ========== DOM ELEMENTS ==========
+        const rjGrid = document.getElementById('rj-grid');
+        const episodesPanel = document.getElementById('episodes-panel');
+        const panelOverlay = document.getElementById('panel-overlay');
+        const panelClose = document.getElementById('panel-close');
+        const episodesList = document.getElementById('episodes-list');
+        const musicPlayer = document.getElementById('music-player');
+        const audioPlayer = document.getElementById('audio-player');
+        const navbar = document.getElementById('navbar');
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        // ========== FETCH RJ DATA ==========
+        async function fetchAllRJData() {
+            rjGrid.innerHTML = '<div class="loading-spinner"></div>';
+            
+            const promises = RJ_FEEDS.map(async (feed) => {
+                try {
+                    const response = await fetch(feed.url);
+                    const data = await response.json();
+                    return {
+                        name: feed.name,
+                        url: feed.url,
+                        channel: data.channel
+                    };
+                } catch (error) {
+                    console.error(`Error fetching ${feed.name}:`, error);
+                    return null;
+                }
+            });
+
+            const results = await Promise.all(promises);
+            rjData = results.filter(r => r !== null);
+            
+            renderRJGrid();
+        }
+
+        // ========== RENDER RJ GRID ==========
+        function renderRJGrid() {
+            if (rjData.length === 0) {
+                rjGrid.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 15s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
+                        <h3>No shows available</h3>
+                        <p>Please check back later</p>
+                    </div>
+                `;
+                return;
+            }
+
+            document.getElementById('rj-total').textContent = rjData.length;
+
+            rjGrid.innerHTML = rjData.map((rj, index) => {
+                const channel = rj.channel;
+                const image = channel['itunes:image'] || channel.image?.url || '';
+                const title = channel.title || rj.name;
+                const timeMatch = title.match(/\d+[AP]M\s*to\s*\d+[AP]M/i);
+                const timeSlot = timeMatch ? timeMatch[0] : 'Various Times';
+                const episodeCount = channel.items?.length || 0;
+
+                return `
+                    <div class="rj-card" data-index="${index}" onclick="openEpisodesPanel(${index})">
+                        <div class="rj-image-wrapper">
+                            <img src="${image}" alt="${rj.name}" class="rj-image" onerror="this.src='https://via.placeholder.com/400x400/1A1A2E/FF6B35?text=${encodeURIComponent(rj.name)}'">
+                            <div class="rj-overlay">
+                                <div class="rj-info">
+                                    <h3 class="rj-name">${rj.name}</h3>
+                                    <div class="rj-time">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <polyline points="12 6 12 12 16 14"/>
+                                        </svg>
+                                        ${timeSlot}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rj-meta">
+                            <span class="rj-episodes"><span>${episodeCount}</span> Episodes</span>
+                            <div class="rj-play-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ========== EPISODES PANEL ==========
+        function openEpisodesPanel(index) {
+            currentRJ = rjData[index];
+            const channel = currentRJ.channel;
+            
+            // Update panel header
+            document.getElementById('panel-rj-image').src = channel['itunes:image'] || channel.image?.url || '';
+            document.getElementById('panel-rj-name').textContent = currentRJ.name;
+            document.getElementById('panel-rj-desc').textContent = channel.description || '';
+
+            // Render episodes
+            const episodes = channel.items || [];
+            if (episodes.length === 0) {
+                episodesList.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 18V5l12-2v13"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <circle cx="18" cy="16" r="3"/>
+                        </svg>
+                        <h3>No episodes yet</h3>
+                        <p>Check back soon for new content</p>
+                    </div>
+                `;
+            } else {
+                episodesList.innerHTML = episodes.map((ep, i) => {
+                    const pubDate = new Date(ep.pubDate);
+                    const dateStr = pubDate.toLocaleDateString('en-US', { 
+                        weekday: 'short', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                    const duration = ep['itunes:duration'] || 'Unknown';
+                    const isCurrentlyPlaying = currentEpisode && currentEpisode.guid === ep.guid;
+
+                    return `
+                        <div class="episode-card ${isCurrentlyPlaying ? 'playing' : ''}" data-episode-index="${i}" onclick="playEpisode(${i})">
+                            <div class="episode-header">
+                                <button class="episode-play-btn" onclick="event.stopPropagation(); playEpisode(${i})">
+                                    <svg class="play-icon" viewBox="0 0 24 24">
+                                        ${isCurrentlyPlaying && isPlaying ? 
+                                            '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>' : 
+                                            '<polygon points="5 3 19 12 5 21 5 3"/>'}
+                                    </svg>
+                                </button>
+                                <div class="episode-details">
+                                    <h4 class="episode-title">${ep.title}</h4>
+                                    <div class="episode-meta">
+                                        <span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                                <line x1="3" y1="10" x2="21" y2="10"/>
+                                            </svg>
+                                            ${dateStr}
+                                        </span>
+                                        <span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <polyline points="12 6 12 12 16 14"/>
+                                            </svg>
+                                            ${duration}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Update active state on RJ cards
+            document.querySelectorAll('.rj-card').forEach((card, i) => {
+                card.classList.toggle('active', i === index);
+            });
+
+            // Show panel
+            episodesPanel.classList.add('active');
+            panelOverlay.classList.add('active');
+        }
+
+        function closeEpisodesPanel() {
+            episodesPanel.classList.remove('active');
+            panelOverlay.classList.remove('active');
+            document.querySelectorAll('.rj-card').forEach(card => {
+                card.classList.remove('active');
+            });
+        }
+
+        // ========== AUDIO PLAYER ==========
+        function playEpisode(episodeIndex) {
+            const episodes = currentRJ.channel.items;
+            currentEpisodeIndex = episodeIndex;
+            currentEpisode = episodes[episodeIndex];
+
+            const image = currentEpisode['itunes:image'] || currentRJ.channel['itunes:image'] || '';
+            
+            // Update player UI
+            document.getElementById('player-artwork-img').src = image;
+            document.getElementById('expanded-artwork-img').src = image;
+            document.getElementById('player-title').textContent = currentEpisode.title;
+            document.getElementById('expanded-title').textContent = currentEpisode.title;
+            document.getElementById('player-artist').textContent = currentRJ.name;
+            document.getElementById('expanded-artist').textContent = currentRJ.name;
+
+            // Load and play audio
+            audioPlayer.src = currentEpisode.url;
+            audioPlayer.load();
+            audioPlayer.play();
+            isPlaying = true;
+
+            // Show player
+            musicPlayer.classList.add('active', 'playing');
+            updatePlayPauseButtons();
+            updateEpisodesList();
+        }
+
+        function togglePlayPause() {
+            if (!currentEpisode) return;
+            
+            if (isPlaying) {
+                audioPlayer.pause();
+            } else {
+                audioPlayer.play();
+            }
+        }
+
+        function playPrevious() {
+            if (!currentRJ) return;
+            const episodes = currentRJ.channel.items;
+            if (currentEpisodeIndex > 0) {
+                playEpisode(currentEpisodeIndex - 1);
+            }
+        }
+
+        function playNext() {
+            if (!currentRJ) return;
+            const episodes = currentRJ.channel.items;
+            if (currentEpisodeIndex < episodes.length - 1) {
+                playEpisode(currentEpisodeIndex + 1);
+            }
+        }
+
+        function updatePlayPauseButtons() {
+            const playIcon = '<polygon points="5 3 19 12 5 21 5 3"/>';
+            const pauseIcon = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+            
+            const icon = isPlaying ? pauseIcon : playIcon;
+            
+            document.querySelector('#play-pause-btn svg').innerHTML = icon;
+            document.querySelector('#expanded-play-pause-btn svg').innerHTML = icon;
+        }
+
+        function updateEpisodesList() {
+            document.querySelectorAll('.episode-card').forEach((card, i) => {
+                const isCurrentlyPlaying = i === currentEpisodeIndex;
+                card.classList.toggle('playing', isCurrentlyPlaying);
+                
+                const btn = card.querySelector('.episode-play-btn svg');
+                if (btn) {
+                    btn.innerHTML = isCurrentlyPlaying && isPlaying ? 
+                        '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>' : 
+                        '<polygon points="5 3 19 12 5 21 5 3"/>';
+                }
+            });
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateProgress() {
+            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('expanded-progress-fill').style.width = `${progress}%`;
+            document.getElementById('current-time').textContent = formatTime(audioPlayer.currentTime);
+            document.getElementById('expanded-current-time').textContent = formatTime(audioPlayer.currentTime);
+        }
+
+        function seekTo(e, progressBar) {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audioPlayer.currentTime = percent * audioPlayer.duration;
+        }
+
+        function toggleExpanded() {
+            isExpanded = !isExpanded;
+            musicPlayer.classList.toggle('expanded', isExpanded);
+        }
+
+        // ========== EVENT LISTENERS ==========
+        // Panel
+        panelClose.addEventListener('click', closeEpisodesPanel);
+        panelOverlay.addEventListener('click', closeEpisodesPanel);
+
+        // Audio events
+        audioPlayer.addEventListener('play', () => {
+            isPlaying = true;
+            musicPlayer.classList.add('playing');
+            updatePlayPauseButtons();
+            updateEpisodesList();
+        });
+
+        audioPlayer.addEventListener('pause', () => {
+            isPlaying = false;
+            musicPlayer.classList.remove('playing');
+            updatePlayPauseButtons();
+            updateEpisodesList();
+        });
+
+        audioPlayer.addEventListener('timeupdate', updateProgress);
+
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            document.getElementById('duration-time').textContent = formatTime(audioPlayer.duration);
+            document.getElementById('expanded-duration-time').textContent = formatTime(audioPlayer.duration);
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            playNext();
+        });
+
+        // Player controls
+        document.getElementById('play-pause-btn').addEventListener('click', togglePlayPause);
+        document.getElementById('expanded-play-pause-btn').addEventListener('click', togglePlayPause);
+        document.getElementById('prev-btn').addEventListener('click', playPrevious);
+        document.getElementById('next-btn').addEventListener('click', playNext);
+        document.getElementById('expanded-prev-btn').addEventListener('click', playPrevious);
+        document.getElementById('expanded-next-btn').addEventListener('click', playNext);
+
+        // Progress bar seeking
+        document.getElementById('progress-bar').addEventListener('click', (e) => {
+            seekTo(e, document.getElementById('progress-bar'));
+        });
+        document.getElementById('expanded-progress-bar').addEventListener('click', (e) => {
+            seekTo(e, document.getElementById('expanded-progress-bar'));
+        });
+
+        // Volume
+        document.getElementById('volume-slider').addEventListener('input', (e) => {
+            audioPlayer.volume = e.target.value / 100;
+        });
+
+        // Expand/Collapse
+        document.getElementById('player-expand-btn').addEventListener('click', toggleExpanded);
+        document.getElementById('collapse-btn').addEventListener('click', toggleExpanded);
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+                e.preventDefault();
+                togglePlayPause();
+            }
+            if (e.code === 'Escape') {
+                if (isExpanded) {
+                    toggleExpanded();
+                } else if (episodesPanel.classList.contains('active')) {
+                    closeEpisodesPanel();
+                }
+            }
+        });
+
+        // ========== INIT ==========
+        fetchAllRJData();
+    </script>
+</body>
+</html>

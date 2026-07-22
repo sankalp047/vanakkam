@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanakkam FM- Tamil Radio Station</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- ========================================
+         NAVBAR - Can be extracted to components/navbar.html
+         ======================================== -->
+<div id="navbar-placeholder"></div>
+
+    <!-- ========================================
+         HERO / HEADER SECTION
+         ======================================== -->
+    <section class="hero" id="home">
+        <!-- Animated Background -->
+        <div class="hero-bg">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+            <div class="floating-notes">
+                <span class="note">♪</span>
+                <span class="note">♫</span>
+                <span class="note">♪</span>
+                <span class="note">♫</span>
+                <span class="note">♪</span>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-subtitle">Welcome to</p>
+                <h1 class="hero-title">
+                    Vanakkam<br><span class="gradient-text">FM</span>
+                </h1>
+                <p class="hero-tagline">டாலஸை தலைமையிடமாகக் கொண்ட அமெரிக்காவின் நம்பர் 1 தமிழ் ரேடியோ</p>
+                <p class="hero-description">Welcome to 104.9 HD2, your home for Tamil hit songs in Dallas–Fort Worth. Tune in 24/7 for the best Tamil music, powered by our incredible live Radio Jockeys around the clock.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#shows" class="btn btn-primary">
+                        <span>Explore Shows</span>
+                        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="radio-player">
+                    <div class="player-ring"></div>
+                    <div class="player-ring"></div>
+                    <div class="player-ring"></div>
+                    <div class="player-center">
+                        <div class="equalizer">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                        <p class="now-playing">Now Playing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <p>Scroll to explore</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SHOWS CAROUSEL SECTION
+         ======================================== -->
+    <section class="shows-section" id="shows">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Our Programs</span>
+                <h2 class="section-title">Featured <span class="highlight">Shows</span></h2>
+                <p class="section-description">Discover our handpicked selection of programs that bring you the best of Tamil entertainment, music, and culture.</p>
+            </div>
+            
+            <!-- Carousel -->
+            <div class="carousel-wrapper">
+                <div class="carousel" id="shows-carousel">
+                    <div class="show-card">
+                        <div class="card-image">
+                             <div class="card-placeholder" style="background-image: url('img/lucky.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                                
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-info">
+                                    <span class="show-time">4pm to 7pm</span>
+                                    <h3 class="show-title">Lucky</h3>
+                                    <p class="show-host">Lucky Charm</p>
+                                    
+                                    <span class="show-genre">Monday to Thursday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h4>Lucky</h4>
+                            <p>Lucky Charm</p>
+                        </div>
+                    </div>
+
+               <div class="show-card">
+                        <div class="card-image">
+                        <div class="card-placeholder" style="background-image: url('img/Raksha.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">  
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-info">
+                                    <span class="show-time">7 PM to 10 PM</span>
+                                    <h3 class="show-title">Raksha</h3>
+                                    <p class="show-host">English Pesnalum Tamilanda</p>
+                                <span class="show-genre">Monday to Friday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h4>Raksha</h4>
+                            <p>Filter Coffee</p>
+                        </div>
+                    </div>
+
+                    <div class="show-card">
+                        <div class="card-image">
+                            <div class="card-placeholder" style="background-image: url('img/janani.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                                
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-info">
+                                    <span class="show-time">11am to 2pm</span>
+                                    <h3 class="show-title">Janani</h3>
+                                    <p class="show-host">Filter Coffee</p>
+                                    
+                                    <span class="show-genre">Monday to Friday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h4>Janani</h4>
+                            <p>Filter Coffee</p>
+                        </div>
+                    </div>
+
+                    <div class="show-card">
+                        <div class="card-image">
+                             <div class="card-placeholder" style="background-image: url('img/Maithreyi_Cover.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-info">
+                                    <span class="show-time">4pm to 7pm</span>
+                                    <h3 class="show-title">Mythri</h3>
+                                    <p class="show-host">M3 With Maithreyi</p>
+                                  <!--  <p class="show-desc">Get your groove on with the latest Tamil hits, trending tracks, and high-energy party anthems!</p>-->
+                                    <span class="show-genre">Friday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h4>Mythri</h4>
+                            <p>M3 With Maithreyi</p>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Show Card 1 -->
+                  <div class="show-card">
+                        <div class="card-image">
+                            <div class="card-placeholder" style="background-image: url('img/zara.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">  
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-info">
+                                    <span class="show-time">11 AM to 2 PM</span>
+                                    <h3 class="show-title">Zara</h3>
+                                    <p class="show-host">Jom Sambal</p>
+
+                                    <span class="show-genre">Monday to Friday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h4>Zara</h4>
+                            <p>Jom Sambal</p>
+                        </div>
+                    </div>
+                    
+              <div class="show-card">
+                        <div class="card-image">
+                        <div class="card-placeholder" style="background-image: url('img/Ananth.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">  
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-info">
+                                    <span class="show-time">9:00 AM to 11 AM</span>
+                                    <h3 class="show-title">Ananth</h3>
+                                    <p class="show-host">Super Hit Sunday</p>
+                                    <!--<p class="show-desc">Start your morning with soulful devotional songs and uplifting classical melodies that set the perfect tone for your day.</p>-->
+                                    <span class="show-genre">Sunday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h4>Ananth</h4>
+                            <p>Super Hit Sunday</p>
+                        </div>
+                    </div>
+
+
+                    
+              <div class="show-card">
+                        <div class="card-image">
+                        <div class="card-placeholder" style="background-image: url('img/Lingesh.JPEG'); background-size: cover; background-position: center; background-repeat: no-repeat;">  
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-info">
+                                    <span class="show-time">4 PM to 7 PM</span>
+                                    <h3 class="show-title">Lingesh</h3>
+                                    <p class="show-host">Andhi Hours</p>
+                                    <!--<p class="show-desc">Start your morning with soulful devotional songs and uplifting classical melodies that set the perfect tone for your day.</p>-->
+                                    <span class="show-genre">Saturday and Sunday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h4>Lingesh</h4>
+                            <p>Andhi Hours</p>
+                        </div>
+                    </div>
+
+               <div class="show-card">
+                        <div class="card-image">
+                        <div class="card-placeholder" style="background-image: url('img/Malini-Filter\ Coffee.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">  
+                            </div>                          
+                            <div class="card-overlay">
+                                <div class="card-info">
+                                    <span class="show-time">7 AM to 10 AM</span>
+                                    <h3 class="show-title">Malini</h3>
+                                    <p class="show-host">Filter Coffee</p>
+                                    <!--<p class="show-desc">Start your morning with soulful devotional songs and uplifting classical melodies that set the perfect tone for your day.</p>-->
+                                    <span class="show-genre">Devotional & Classical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h4>Malini</h4>
+                            <p>Filter Coffee</p>
+                        </div>
+                    </div>                   
+
+                    <!-- Show Card 2 -->
+
+                    
+                    <!-- Show Card 3 -->
+                    <div class="show-card">
+                        <div class="card-image">
+                             <div class="card-placeholder" style="background-image: url('img/prabhu.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                                
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-info">
+                                    <span class="show-time">10am to 1pm & 11am to 2pm</span>
+                                    <h3 class="show-title">Prabhu</h3>
+                                    <p class="show-host">Weekend meter</p>
+                                   <!--<p class="show-desc">Engaging discussions on current affairs, lifestyle tips, and heartwarming stories from our listeners.</p>-->
+                                    <span class="show-genre">Saturday and Sunday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h4>Prabhu</h4>
+                            <p>Weekend meter</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Show Card 4 -->
+                    <div class="show-card">
+                        <div class="card-image">
+                             <div class="card-placeholder" style="background-image: url('img/gomathi.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                                
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-info">
+                                    <span class="show-time">2pm to 4pm</span>
+                                    <h3 class="show-title">Gomathi</h3>
+                                    <p class="show-host">Leysa Leysa</p>
+                                   <!-- <p class="show-desc">A tribute to the Maestro! Three hours of pure Ilaiyaraaja magic with rare compositions and fan favorites.</p>-->
+                                    <span class="show-genre">Saturday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h4>Gomathi</h4>
+                            <p>Leysa Leysa</p>
+                        </div>
+                    </div>
+                    
+
+                    
+                    <!-- Show Card 6 -->
+
+                
+                <!-- Carousel Navigation -->
+                <button class="carousel-btn carousel-prev" id="carousel-prev" aria-label="Previous">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="carousel-btn carousel-next" id="carousel-next" aria-label="Next">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Carousel Dots -->
+            <div class="carousel-dots" id="carousel-dots"></div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         ABOUT US SECTION
+         ======================================== -->
+    <section class="about-section" id="about">
+        <div class="about-bg-pattern"></div>
+        
+        <div class="section-container">
+            <div class="about-content">
+                <div class="about-text">
+                    <span class="section-tag">Our Story</span>
+                    <h2 class="section-title">About <span class="highlight">Us</span></h2>
+                    <p class="about-description">
+                        Radio Vanakkam was created with one simple mission: to keep the Tamil heartbeat alive—through music, voices, and stories that feel like home. Built in Dallas and broadcast proudly on 104.9 HD2, we’re here to connect Tamilians across the U.S. and around the world with the sound of our culture.
+                    </p>
+                    <p class="about-description">
+                       What truly makes Radio Vanakkam special is our people. Our talented Radio Jockeys are live 24/7, bringing energy, warmth, and real connection to every show. Along with our music curators, they work round the clock to create a listening experience that’s entertaining, meaningful, and community-driven—whether it’s music, conversations, shoutouts, or cultural moments that matter to you.
+                    </p>
+                     <p class="about-description">
+                       No matter where you’re listening from—Chennai, Toronto, Singapore, London, or right here in Texas—Radio Vanakkam is your daily companion and your direct link to Tamil music, culture, and community.
+                    </p>
+                    <!-- Stats -->
+                    <div class="about-stats">
+
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="9">0</span>
+                            <span class="stat-label">Expert RJs</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="12">0</span>
+                            <span class="stat-label">Hours Live</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="2">0</span>
+                            <span class="stat-label">Countries Reached</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="about-image-stack">
+                        <div class="about-img img-1">
+                            <div class="img-placeholder" style="background: linear-gradient(135deg, #FF6B6B 0%, #C44569 100%);">
+                                <span>🎙️</span>
+                            </div>
+                        </div>
+                        <div class="about-img img-2">
+                            <div class="img-placeholder" style="background: linear-gradient(135deg, #F8B500 0%, #FF6B6B 100%);">
+                                <span>🎧</span>
+                            </div>
+                        </div>
+                        <div class="about-img img-3">
+                            <div class="img-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <span>🎶</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative Elements -->
+                    <div class="about-decoration">
+                        <div class="decor-circle"></div>
+                        <div class="decor-dots"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CONTACT US SECTION
+         ======================================== -->
+    <section class="contact-section" id="contact">
+        <div class="section-container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <span class="section-tag">Get in Touch</span>
+                    <h2 class="section-title">Contact <span class="highlight">Us</span></h2>
+                    <p class="contact-description">
+                        Want to advertise on the radio? Have a song request, a shoutout, or just want to say வணக்கம்? We’d love to hear from you!
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Sales</h4>
+                                <p>+1 (912) 345-6789</p>
+                            </div>
+                            
+                        </div>
+                         <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Studio</h4>
+                                <p>+1 (912) 345-6789</p>
+                            </div>
+                            
+                        </div>
+                        
+
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>hello@vanakkamfm.net</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Studio</h4>
+                                <p> 6850 TPC Dr #108 <br>McKinney, TX 75070</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#fff"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Full name" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="name@company.com" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="businessName">Business Name *</label>
+                            <input type="text" id="businessName" name="businessName" required placeholder="Business / Organization" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <span>Submit</span>
+                            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER - Can be extracted to components/footer.html
+         ======================================== -->
+<footer class="footer" id="footer">
+  <!-- Decorative Wave SVG -->
+  <div class="footer-wave">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path d="M0,40 C480,100 960,0 1440,60 L1440,100 L0,100 Z" fill="currentColor"></path>
+    </svg>
+  </div>
+
+  <div class="footer-container">
+    <div class="footer-main">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <div class="footer-logo" style="display:flex;align-items:center;gap:12px;">
+          <img src="img/logo.png" alt="Radio Vanakkam" style="height:44px;width:auto;display:block;" />
+          <div>
+            <div class="logo-text" style="line-height:1.1;">
+              Radio <span class="highlight">Vanakkam</span>
+            </div>
+            <p class="footer-tagline" style="margin:6px 0 0;">
+              உங்கள் இசை பயணம் இங்கே தொடங்குகிறது
+            </p>
+          </div>
+        </div>
+
+        <p class="footer-description" style="margin-top:14px;max-width:520px;">
+          Dallas–Fort Worth’s Tamil station — live RJs, nonstop hits, and culture that feels like home.
+        </p>
+      </div>
+
+      <!-- Info Columns (no links) -->
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>Station</h4>
+          <ul>
+            <li><span>104.9 HD2</span></li>
+            <li><span>Dallas–Fort Worth</span></li>
+            <li><span>Live 24/7</span></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><span>Studio: +1 (912) 345-6789</span></li>
+            <li><span>Sales: +1 (912) 345-6789</span></li>
+            <li><span>Email: hello@vanakkamfm.net</span></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Studio</h4>
+          <ul>
+            <li><span>6850 TPC Dr #108</span></li>
+            <li><span>McKinney, TX 75070</span></li>
+            <li><span>United States</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 Radio Vanakkam.</p>
+      <div class="footer-legal">
+        <span class="footer-description">All rights reserved.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- ========================================
+         FLOATING PLAY LIVE BAR (Fixed)
+         ======================================== -->
+    <div class="playbar" id="playbar" aria-label="Play Live Bar">
+<div class="playbar-inner">
+  <div class="playbar-brand" aria-label="Vanakkam Radio Player">
+    <img src="img/logo.png" alt="Vanakkam Radio" class="playbar-logo">
+    <span class="playbar-title">Vanakkam FM</span>
+  </div>
+
+  <!-- hidden audio element -->
+  <audio id="radio-audio" preload="none"></audio>
+
+  <div class="playbar-actions" aria-label="Quick actions">
+    <!-- Play/Pause Button -->
+    <button type="button" class="playbar-action playbar-play" id="play-toggle" aria-label="Play">
+      <span id="play-icon">▶</span>
+      <span id="play-text">Play</span>
+    </button>
+
+    <!-- Replace phone numbers -->
+    <a href="tel:+19123456789" class="playbar-action" aria-label="Call Studio">
+      <span>Call Studio</span>
+    </a>
+
+    <a href="tel:+19123456789" class="playbar-action" aria-label="Call Sales">
+      <span>Call Sales</span>
+    </a>
+  </div>
+</div>
+
+    </div>
+
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Main JavaScript --><script>
+  fetch("components/navbar.html")
+    .then(res => {
+      if (!res.ok) throw new Error("Navbar not found");
+      return res.text();
+    })
+    .then(html => {
+      document.getElementById("navbar-placeholder").innerHTML = html;
+    })
+    .catch(err => console.error("Error loading navbar:", err));
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBiAG-ii59UWQvuukzbJiqWMa-MZqSsJT8",
+    authDomain: "vanakkamfm-dabeb.firebaseapp.com",
+    projectId: "vanakkamfm-dabeb",
+    storageBucket: "vanakkamfm-dabeb.firebasestorage.app",
+    messagingSenderId: "431002476586",
+    appId: "1:431002476586:web:c09551500e8fb203b36353",
+    measurementId: "G-32VDE0SLLY"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  window.db = getFirestore(app);
+
+  console.log("✅ Firebase + Firestore ready");
+</script>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
