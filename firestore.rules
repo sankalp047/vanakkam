@@ -1,0 +1,47 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Public contact form — anyone can create a message (matches the
+    // existing behavior the site already relies on), only admins can
+    // read/manage the inbox. The Mailgun Cloud Function uses the Admin
+    // SDK and is unaffected by these rules either way.
+    match /contactMessages/{docId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Synced from StreamGuys by the podcastSync Cloud Function (Admin SDK,
+    // bypasses these rules). Public read for the Podcasts page; only admins
+    // may write directly (e.g. episode artwork overrides).
+    match /podcasts/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Sponsor/client banners — public read for the homepage slot, writes
+    // restricted to the admin dashboard.
+    match /banners/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Presence-only allowlist of admin UIDs. Managed out-of-band (Firebase
+    // console / a one-off script) — never writable from the app itself.
+    match /admins/{uid} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // Default deny for anything else.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

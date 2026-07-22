@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null
+        && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
+    }
+
+    // Sponsor/client banner creative — public read (rendered on the
+    // homepage), writes restricted to signed-in admins via the dashboard.
+    match /banner-images/{bannerId}/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Default deny for anything else in the bucket.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
