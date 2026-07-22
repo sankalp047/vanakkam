@@ -18,6 +18,12 @@
   box-shadow: var(--shadow-md);
 }
 
+.rj-card__main {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
 .rj-card__image {
   position: relative;
   aspect-ratio: 1;
@@ -57,10 +63,35 @@
 .rj-card__meta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--space-2xs);
   padding: var(--space-sm) var(--space-md);
   font-size: 0.85rem;
   color: var(--color-text-muted);
+}
+
+.rj-card__meta > span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rj-card__info {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+
+.rj-card__info:hover {
+  background: var(--color-surface-hover);
 }
 
 .rj-card__play-icon {
@@ -68,6 +99,7 @@
   place-items: center;
   width: 32px;
   height: 32px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: var(--gradient-sunset);
   color: #1a0a10;

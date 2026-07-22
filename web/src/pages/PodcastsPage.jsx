@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { usePodcasts } from '../hooks/usePodcasts';
 import { RJGrid } from '../components/podcasts/RJGrid';
 import { EpisodesPanel } from '../components/podcasts/EpisodesPanel';
+import { RJBioModal } from '../components/shared/RJBioModal';
 import './PodcastsPage.css';
 
 export function PodcastsPage() {
   const { podcasts, status } = usePodcasts();
   const [selectedRj, setSelectedRj] = useState(null);
+  const [bioRj, setBioRj] = useState(null);
 
   return (
     <div className="page-content podcasts-page">
@@ -26,10 +28,11 @@ export function PodcastsPage() {
           <p className="podcasts-page__status">Couldn't load podcasts right now. Please try again shortly.</p>
         )}
 
-        <RJGrid podcasts={podcasts} onSelect={setSelectedRj} />
+        <RJGrid podcasts={podcasts} onSelect={setSelectedRj} onShowBio={setBioRj} />
       </div>
 
       {selectedRj && <EpisodesPanel rj={selectedRj} onClose={() => setSelectedRj(null)} />}
+      <RJBioModal rj={bioRj} onClose={() => setBioRj(null)} />
     </div>
   );
 }

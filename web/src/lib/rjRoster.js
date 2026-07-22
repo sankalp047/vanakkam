@@ -1,7 +1,8 @@
 // Single source of truth for the on-air RJ roster: schedule, imagery, and the
 // slug that keys into the `podcasts/{slug}` Firestore doc synced from
 // StreamGuys (see functions/podcastSync.js). Schedule facts are carried
-// forward verbatim from the previous static site's carousel content.
+// forward verbatim from the previous static site's carousel content. Bios
+// are short placeholder copy for the station to refine.
 export const RJ_ROSTER = [
   {
     slug: 'rj-lucky',
@@ -10,6 +11,7 @@ export const RJ_ROSTER = [
     time: '4pm to 7pm',
     days: 'Monday to Thursday',
     image: '/rj/lucky.jpg',
+    bio: 'Kicks off the evening drive with high-energy hits and quick-witted banter, Monday through Thursday.',
   },
   {
     slug: 'rj-raksha',
@@ -18,6 +20,7 @@ export const RJ_ROSTER = [
     time: '7pm to 10pm',
     days: 'Monday to Friday',
     image: '/rj/raksha.jpg',
+    bio: 'Brings a playful English-meets-Tamil mix to close out the weeknight, with listener calls and requests.',
   },
   {
     slug: 'rj-janani',
@@ -26,6 +29,7 @@ export const RJ_ROSTER = [
     time: '11am to 2pm',
     days: 'Monday to Friday',
     image: '/rj/janani.jpg',
+    bio: 'Serves up a warm midday mix of classic and current Tamil favorites alongside easy conversation.',
   },
   {
     slug: 'rj-mythri',
@@ -34,6 +38,7 @@ export const RJ_ROSTER = [
     time: '4pm to 7pm',
     days: 'Friday',
     image: '/rj/mythri.jpg',
+    bio: 'Closes out the work week with an upbeat mix of trending hits and community shoutouts.',
   },
   {
     slug: 'rj-zara',
@@ -42,6 +47,7 @@ export const RJ_ROSTER = [
     time: '11am to 2pm',
     days: 'Monday to Friday',
     image: '/rj/zara.jpg',
+    bio: 'Spices up the midday with an eclectic playlist and a lively on-air personality.',
   },
   {
     slug: 'rj-ananth',
@@ -50,6 +56,7 @@ export const RJ_ROSTER = [
     time: '9am to 11am',
     days: 'Sunday',
     image: '/rj/ananth.jpg',
+    bio: 'Starts the weekend right with back-to-back super hits and a relaxed Sunday morning vibe.',
   },
   {
     slug: 'rj-lingesh',
@@ -58,6 +65,7 @@ export const RJ_ROSTER = [
     time: '4pm to 7pm',
     days: 'Saturday and Sunday',
     image: '/rj/lingesh.jpg',
+    bio: 'Sets the mood for golden-hour weekends with a laid-back selection of favorites.',
   },
   {
     slug: 'rj-malini',
@@ -66,6 +74,7 @@ export const RJ_ROSTER = [
     time: '7am to 10am',
     days: 'Devotional & Classical',
     image: '/rj/malini.jpg',
+    bio: 'Opens the day with soulful devotional and classical selections to start mornings on a peaceful note.',
   },
   {
     slug: 'rj-prabhu',
@@ -74,6 +83,7 @@ export const RJ_ROSTER = [
     time: '10am to 1pm & 11am to 2pm',
     days: 'Saturday and Sunday',
     image: '/rj/prabhu.jpg',
+    bio: 'Keeps weekend energy high with an upbeat mix and lively listener interaction.',
   },
   {
     slug: 'rj-gomathi',
@@ -82,5 +92,6 @@ export const RJ_ROSTER = [
     time: '2pm to 4pm',
     days: 'Saturday',
     image: '/rj/gomathi.jpg',
+    bio: 'Brings a relaxed Saturday afternoon session filled with fan-favorite Tamil hits.',
   },
 ];

@@ -1,4 +1,5 @@
 const WEEKDAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+export const WEEKDAY_LABELS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 /**
  * Parses free-text day ranges like "Monday to Thursday", "Saturday and Sunday",
@@ -55,6 +56,33 @@ export function parseTimeRanges(timeText) {
       return { startMinutes: start, endMinutes: end };
     })
     .filter(Boolean);
+}
+
+/**
+ * Groups the roster into a Sunday–Saturday weekly schedule for a grid
+ * view, sorted by start time within each day. Entries whose `days` text
+ * doesn't parse to real weekdays (e.g. a genre label) are returned
+ * separately under `unscheduled` rather than guessed at.
+ */
+export function buildWeeklySchedule(roster) {
+  const byDay = WEEKDAY_LABELS.map(() => []);
+  const unscheduled = [];
+
+  roster.forEach((rj) => {
+    const days = parseDays(rj.days);
+    const ranges = parseTimeRanges(rj.time);
+    if (!days || ranges.length === 0) {
+      unscheduled.push(rj);
+      return;
+    }
+    days.forEach((dayIndex) => {
+      byDay[dayIndex].push({ ...rj, startMinutes: ranges[0].startMinutes });
+    });
+  });
+
+  byDay.forEach((entries) => entries.sort((a, b) => a.startMinutes - b.startMinutes));
+
+  return { byDay, unscheduled };
 }
 
 export function isOnAirNow(rj, now = new Date()) {
