@@ -1,0 +1,181 @@
+.podcast-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--live-bar-height);
+  z-index: calc(var(--z-fixed) + 1);
+  background: rgba(28, 22, 48, 0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.podcast-bar__inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 260px) auto;
+  align-items: center;
+  gap: var(--space-md);
+  min-height: calc(var(--podcast-bar-height) - 0.5rem);
+  padding-block: var(--space-2xs);
+}
+
+.podcast-bar__art-btn {
+  flex-shrink: 0;
+}
+
+.podcast-bar__art {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.podcast-bar__meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.podcast-bar__title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.podcast-bar__artist {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.podcast-bar__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.podcast-bar__ctrl {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--color-text-secondary);
+}
+
+.podcast-bar__ctrl:hover {
+  color: var(--color-text);
+}
+
+.podcast-bar__ctrl--play {
+  width: 42px;
+  height: 42px;
+  background: var(--gradient-sunset);
+  color: #1a0a10;
+}
+
+.podcast-bar__progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.podcast-bar__time {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  width: 36px;
+}
+
+.podcast-bar__progress {
+  flex: 1;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  position: relative;
+}
+
+.podcast-bar__progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: var(--radius-full);
+  background: var(--gradient-sunset);
+}
+
+.podcast-bar__volume {
+  width: 90px;
+  accent-color: var(--color-primary);
+}
+
+.podcast-bar__expanded {
+  position: fixed;
+  inset: 0;
+  background: var(--gradient-night);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.podcast-bar__collapse {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 1.4rem;
+}
+
+.podcast-bar__expanded-art {
+  width: min(70vw, 320px);
+  height: min(70vw, 320px);
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  box-shadow: var(--shadow-lg);
+}
+
+.podcast-bar__expanded-title {
+  font-size: 1.3rem;
+  max-width: 480px;
+}
+
+.podcast-bar__expanded-artist {
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 860px) {
+  .podcast-bar__inner {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'art meta ctrl'
+      'progress progress progress';
+    row-gap: var(--space-2xs);
+  }
+
+  .podcast-bar__art-btn {
+    grid-area: art;
+  }
+  .podcast-bar__meta {
+    grid-area: meta;
+  }
+  .podcast-bar__controls {
+    grid-area: ctrl;
+  }
+  .podcast-bar__progress-wrap {
+    grid-area: progress;
+  }
+  .podcast-bar__volume {
+    display: none;
+  }
+}

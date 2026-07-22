@@ -1,0 +1,86 @@
+// Single source of truth for the on-air RJ roster: schedule, imagery, and the
+// slug that keys into the `podcasts/{slug}` Firestore doc synced from
+// StreamGuys (see functions/podcastSync.js). Schedule facts are carried
+// forward verbatim from the previous static site's carousel content.
+export const RJ_ROSTER = [
+  {
+    slug: 'rj-lucky',
+    name: 'Lucky',
+    show: 'Lucky Charm',
+    time: '4pm to 7pm',
+    days: 'Monday to Thursday',
+    image: '/rj/lucky.jpg',
+  },
+  {
+    slug: 'rj-raksha',
+    name: 'Raksha',
+    show: 'English Pesnalum Tamilanda',
+    time: '7pm to 10pm',
+    days: 'Monday to Friday',
+    image: '/rj/raksha.jpg',
+  },
+  {
+    slug: 'rj-janani',
+    name: 'Janani',
+    show: 'Filter Coffee',
+    time: '11am to 2pm',
+    days: 'Monday to Friday',
+    image: '/rj/janani.jpg',
+  },
+  {
+    slug: 'rj-mythri',
+    name: 'Mythri',
+    show: 'M3 With Maithreyi',
+    time: '4pm to 7pm',
+    days: 'Friday',
+    image: '/rj/mythri.jpg',
+  },
+  {
+    slug: 'rj-zara',
+    name: 'Zara',
+    show: 'Jom Sambal',
+    time: '11am to 2pm',
+    days: 'Monday to Friday',
+    image: '/rj/zara.jpg',
+  },
+  {
+    slug: 'rj-ananth',
+    name: 'Ananth',
+    show: 'Super Hit Sunday',
+    time: '9am to 11am',
+    days: 'Sunday',
+    image: '/rj/ananth.jpg',
+  },
+  {
+    slug: 'rj-lingesh',
+    name: 'Lingesh',
+    show: 'Andhi Hours',
+    time: '4pm to 7pm',
+    days: 'Saturday and Sunday',
+    image: '/rj/lingesh.jpg',
+  },
+  {
+    slug: 'rj-malini',
+    name: 'Malini',
+    show: 'Filter Coffee',
+    time: '7am to 10am',
+    days: 'Devotional & Classical',
+    image: '/rj/malini.jpg',
+  },
+  {
+    slug: 'rj-prabhu',
+    name: 'Prabhu',
+    show: 'Weekend Meter',
+    time: '10am to 1pm & 11am to 2pm',
+    days: 'Saturday and Sunday',
+    image: '/rj/prabhu.jpg',
+  },
+  {
+    slug: 'rj-gomathi',
+    name: 'Gomathi',
+    show: 'Leysa Leysa',
+    time: '2pm to 4pm',
+    days: 'Saturday',
+    image: '/rj/gomathi.jpg',
+  },
+];

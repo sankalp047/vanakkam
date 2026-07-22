@@ -1,0 +1,74 @@
+:root {
+  /* Sunset-over-Chennai palette: deep indigo night sky, warm rose-to-gold gradient */
+  --color-bg: #0c0a14;
+  --color-bg-elevated: #14101f;
+  --color-surface: #1c1630;
+  --color-surface-hover: #251d3d;
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  --color-primary: #ff4d6d;
+  --color-primary-dark: #d63a57;
+  --color-primary-light: #ff8098;
+
+  --color-secondary: #ffb020;
+  --color-secondary-dark: #e0940a;
+  --color-secondary-light: #ffce6b;
+
+  --color-accent: #7c5cfc;
+  --color-accent-dark: #6444d8;
+  --color-accent-light: #a690ff;
+
+  --color-text: #ffffff;
+  --color-text-secondary: #b8b3c7;
+  --color-text-muted: #726c87;
+
+  --gradient-sunset: linear-gradient(135deg, #ff4d6d 0%, #ff8a3d 55%, #ffc93d 100%);
+  --gradient-night: linear-gradient(180deg, #14101f 0%, #0c0a14 100%);
+  --gradient-glow: radial-gradient(circle, rgba(255, 77, 109, 0.35) 0%, rgba(124, 92, 252, 0) 70%);
+
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-tamil: 'Noto Sans Tamil', 'Poppins', sans-serif;
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 6.5rem;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 48px rgba(255, 77, 109, 0.35);
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal: 400;
+  --z-tooltip: 500;
+
+  --container-max: 1360px;
+  --live-bar-height: 84px;
+  --podcast-bar-height: 88px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --live-bar-height: 128px;
+    --podcast-bar-height: 96px;
+  }
+}
