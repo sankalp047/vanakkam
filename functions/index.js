@@ -8,6 +8,8 @@ const {URLSearchParams} = require("url");
 
 admin.initializeApp();
 
+exports.podcastSync = require("./podcastSync").podcastSync;
+
 const MAILGUN_API_KEY = defineSecret("MAILGUN_API_KEY");
 const MAILGUN_DOMAIN = "vanakkamfm.net";
 const TEAM_TO = "sales-website@vanakkamfm.net";
@@ -37,7 +39,7 @@ exports.contactMessageCreated = onDocumentCreated(
       const name = data.name || "";
       const email = data.email || "";
       const phone = data.phone || "";
-      const business = data.business || "";
+      const business = data.businessName || "";
       const docId = event.params.docId;
 
       const promises = [];
