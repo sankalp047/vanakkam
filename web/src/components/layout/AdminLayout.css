@@ -1,0 +1,119 @@
+.admin-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100svh;
+  background: var(--color-bg);
+}
+
+.admin-layout__sidebar {
+  background: var(--color-bg-elevated);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg) var(--space-md);
+}
+
+.admin-layout__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: var(--space-xl);
+}
+
+.admin-layout__brand img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.admin-layout__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.admin-layout__link {
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.admin-layout__link:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.admin-layout__link--active {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.admin-layout__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.admin-layout__email {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-layout__logout {
+  align-self: flex-start;
+  font-size: 0.85rem;
+  color: var(--color-primary-light);
+  font-weight: 600;
+}
+
+.admin-layout__content {
+  padding: var(--space-xl);
+  overflow-x: hidden;
+}
+
+@media (max-width: 780px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-layout__sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .admin-layout__brand {
+    margin-bottom: 0;
+  }
+
+  .admin-layout__nav {
+    flex-direction: row;
+    flex: unset;
+  }
+
+  .admin-layout__footer {
+    border-top: none;
+    padding-top: 0;
+    margin-left: auto;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .admin-layout__email {
+    display: none;
+  }
+}

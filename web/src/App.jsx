@@ -1,27 +1,54 @@
 import { Route, Routes } from 'react-router-dom';
 import { PlayerProvider } from './context/PlayerProvider';
+import { AuthProvider } from './context/AuthProvider';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
+import { AdminGuard } from './components/layout/AdminGuard';
+import { AdminLayout } from './components/layout/AdminLayout';
 import { LiveStreamBar } from './components/player/LiveStreamBar';
 import { PodcastMiniPlayer } from './components/player/PodcastMiniPlayer';
 import { HomePage } from './pages/HomePage';
 import { PodcastsPage } from './pages/PodcastsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { AdminLoginPage } from './pages/admin/AdminLoginPage';
+import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
+import { AdminBannersPage } from './pages/admin/AdminBannersPage';
+import { AdminPodcastsPage } from './pages/admin/AdminPodcastsPage';
+import { AdminInboxPage } from './pages/admin/AdminInboxPage';
 
-export default function App() {
+function SiteLayout({ children }) {
   return (
-    <PlayerProvider>
+    <>
       <Navbar />
-      <main style={{ flex: 1 }}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/podcasts" element={<PodcastsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
+      <main style={{ flex: 1 }}>{children}</main>
       <Footer />
       <PodcastMiniPlayer />
       <LiveStreamBar />
-    </PlayerProvider>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <PlayerProvider>
+        <Routes>
+          <Route path="/" element={<SiteLayout><HomePage /></SiteLayout>} />
+          <Route path="/podcasts" element={<SiteLayout><PodcastsPage /></SiteLayout>} />
+
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route element={<AdminGuard />}>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboardPage />} />
+              <Route path="banners" element={<AdminBannersPage />} />
+              <Route path="podcasts" element={<AdminPodcastsPage />} />
+              <Route path="inbox" element={<AdminInboxPage />} />
+            </Route>
+          </Route>
+
+          <Route path="*" element={<SiteLayout><NotFoundPage /></SiteLayout>} />
+        </Routes>
+      </PlayerProvider>
+    </AuthProvider>
   );
 }
