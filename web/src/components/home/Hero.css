@@ -1,7 +1,6 @@
 .hero {
   background: var(--color-bg);
   padding-block: var(--space-2xl) var(--space-2xl);
-  border-bottom: 2px solid var(--color-border-strong);
 }
 
 .hero__grid {
