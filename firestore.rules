@@ -3,9 +3,15 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    function isAdmin() {
+    function isAdminEmail() {
       return request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+        && request.auth.token.email in ['sankalpsingh6@gmail.com'];
+    }
+
+    function isAdmin() {
+      return isAdminEmail()
+        || (request.auth != null
+            && exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
     }
 
     // Public contact form — anyone can create a message (matches the

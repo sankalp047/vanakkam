@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../firebase';
+import { onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { auth } from '../firebase';
+import { isAdminEmail } from '../lib/admins';
+
+const googleProvider = new GoogleAuthProvider();
 
 /**
- * Tracks the signed-in Firebase user and whether they're present in the
- * admins/{uid} allowlist doc (see firestore.rules — presence = admin,
- * no roles/claims needed for a 1-3 person staff team).
+ * Tracks the signed-in Firebase user (Google sign-in only) and whether their
+ * email is on the admin allowlist (see src/lib/admins.js + firestore.rules).
  */
 export function useAuth() {
   const [user, setUser] = useState(undefined); // undefined = not yet resolved
@@ -14,28 +15,16 @@ export function useAuth() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (nextUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (nextUser) => {
       setUser(nextUser);
-      if (!nextUser) {
-        setIsAdmin(false);
-        setLoading(false);
-        return;
-      }
-      try {
-        const snap = await getDoc(doc(db, 'admins', nextUser.uid));
-        setIsAdmin(snap.exists());
-      } catch {
-        setIsAdmin(false);
-      } finally {
-        setLoading(false);
-      }
+      setIsAdmin(nextUser ? isAdminEmail(nextUser.email) : false);
+      setLoading(false);
     });
-
     return unsubscribe;
   }, []);
 
-  const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
+  const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
   const logout = () => signOut(auth);
 
-  return { user, isAdmin, loading, login, logout };
+  return { user, isAdmin, loading, loginWithGoogle, logout };
 }
