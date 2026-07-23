@@ -114,14 +114,33 @@
     grid-template-columns: 1fr;
   }
 
-  .about-visual {
-    order: -1;
-    height: 260px;
-    max-width: 340px;
-    margin-inline: auto;
-  }
-
   .about-text p {
     max-width: none;
+  }
+
+  /* Collage → clean static row so nothing collapses/overflows on mobile */
+  .about-visual {
+    order: -1;
+    height: auto;
+    display: flex;
+    gap: var(--space-2xs);
+    align-items: stretch;
+  }
+
+  .about-img {
+    position: static;
+    width: auto;
+    flex: 1;
+    transform: none;
+  }
+
+  .about-img--1,
+  .about-img--2 {
+    aspect-ratio: 3 / 4;
+  }
+
+  .about-img--3 {
+    aspect-ratio: 3 / 4;
+    font-size: 1.9rem;
   }
 }

@@ -7,6 +7,12 @@
   background: var(--color-chrome);
   color: var(--color-chrome-text);
   border-top: 1px solid var(--color-chrome-border);
+  transition: transform var(--transition-slow);
+}
+
+/* Slide down out of view when the live stream takes over */
+.podcast-bar--hidden {
+  transform: translateY(120%);
 }
 
 /* Full-width seek bar across the very top of the player */

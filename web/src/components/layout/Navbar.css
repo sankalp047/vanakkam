@@ -20,24 +20,14 @@
 .navbar__logo {
   display: flex;
   align-items: center;
-  gap: var(--space-2xs);
   color: var(--color-chrome-text);
   margin-right: auto;
 }
 
 .navbar__logo-img {
-  height: 34px;
-  width: 34px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.navbar__logo-text {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.05rem;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  height: 38px;
+  width: auto;
+  display: block;
 }
 
 .navbar__menu {

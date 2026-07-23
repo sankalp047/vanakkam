@@ -9,9 +9,13 @@ function formatTime(seconds) {
 }
 
 export function PodcastMiniPlayer() {
-  const { podcast } = usePlayerContext();
+  const { podcast, live } = usePlayerContext();
 
   if (podcast.status === 'idle' || !podcast.currentEpisode) return null;
+
+  // When live radio takes over (controlled from the top ON AIR bar), slide the
+  // podcast player down out of the way instead of leaving a stale episode bar.
+  const liveActive = live.status === 'playing' || live.status === 'loading';
 
   const progress = podcast.duration ? (podcast.currentTime / podcast.duration) * 100 : 0;
   const artwork = podcast.currentEpisode.image || podcast.rj?.image || '/logo.png';
@@ -23,7 +27,11 @@ export function PodcastMiniPlayer() {
   };
 
   return (
-    <div className={`podcast-bar ${podcast.isExpanded ? 'podcast-bar--expanded' : ''}`}>
+    <div
+      className={`podcast-bar ${podcast.isExpanded ? 'podcast-bar--expanded' : ''} ${
+        liveActive ? 'podcast-bar--hidden' : ''
+      }`}
+    >
       <button
         type="button"
         className="podcast-bar__seek"

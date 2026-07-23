@@ -38,8 +38,7 @@ export function Navbar() {
         </button>
 
         <a href="/" className="navbar__logo" aria-label="Vanakkam FM home">
-          <img src="/logo.png" alt="" className="navbar__logo-img" />
-          <span className="navbar__logo-text">Vanakkam FM</span>
+          <img src="/logo.png" alt="Vanakkam FM" className="navbar__logo-img" />
         </a>
 
         <nav className={`navbar__menu ${menuOpen ? 'navbar__menu--open' : ''}`}>
