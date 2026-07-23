@@ -135,14 +135,18 @@ export function AdminBannersPage() {
 
         <div className="banner-form__uploads">
           <label>
-            Desktop image (16:9)
+            Desktop image (16:9 — e.g. 1600×900px)
             <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'file16x9', RATIO_16_9, '16:9')} />
           </label>
           <label>
-            Mobile image (9:16)
+            Mobile image (9:16 — e.g. 900×1600px)
             <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'file9x16', RATIO_9_16, '9:16')} />
           </label>
         </div>
+        <p className="admin-note">
+          Both are shown — the desktop (16:9) image on wider screens, the mobile (9:16) image on narrow ones. Any
+          image within ~2% of the ratio works; these sizes just give a crisp result at typical screen widths.
+        </p>
 
         <button type="button" className="btn btn-primary" onClick={uploadBanner} disabled={submitting}>
           {submitting ? 'Uploading…' : 'Add Banner'}

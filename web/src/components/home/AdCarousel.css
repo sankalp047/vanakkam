@@ -11,26 +11,58 @@
 .ad-carousel__link {
   display: block;
   width: 100%;
-  max-width: 900px;
+  cursor: pointer;
 }
 
 .ad-box {
   position: relative;
   width: 100%;
-  max-width: 900px;
   margin: 0 auto;
-  aspect-ratio: 16 / 9;
-  max-height: 300px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 2px solid var(--color-border-strong);
   background: var(--color-ink);
+  transition: transform var(--transition-fast);
+}
+
+.ad-carousel__link:hover .ad-box {
+  transform: translateY(-3px);
+}
+
+/* True 16:9 on wide viewports, true 9:16 on narrow ones — matches whichever
+   image (image16x9 / image9x16) the admin actually uploaded for this size,
+   so nothing gets stretched or cropped against its own ratio. */
+.ad-box--wide {
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+}
+
+.ad-box--tall {
+  max-width: 320px;
+  aspect-ratio: 9 / 16;
 }
 
 .ad-box__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Small "Ad" disclosure tag, standard ad-unit convention */
+.ad-box__tag {
+  position: absolute;
+  top: var(--space-2xs);
+  right: var(--space-2xs);
+  z-index: 3;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-sm);
+  background: rgba(20, 17, 15, 0.75);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Image ripples/dips as the wave crosses, hiding the swap underneath */

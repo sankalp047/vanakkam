@@ -12,13 +12,32 @@ const PLACEHOLDER_SLIDES = [
 
 const ROTATE_MS = 5000;
 const WAVE_MS = 1000;
+const WIDE_QUERY = '(min-width: 700px)';
 
 // A tall wavy vertical band (sine edges) — three copies sweep across the box.
 const WAVE_BAND =
   'M15,-8 C3,14 27,22 15,38 C3,54 27,62 15,78 C3,94 27,102 15,116 L35,116 C23,102 47,94 35,78 C23,62 47,54 35,38 C23,22 47,14 35,-8 Z';
 
+// Drives both the image choice (16:9 vs 9:16) and the box shape off the same
+// breakpoint as the CSS, so the two can never fall out of sync.
+function useIsWide() {
+  const [isWide, setIsWide] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(WIDE_QUERY).matches,
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia(WIDE_QUERY);
+    const onChange = (e) => setIsWide(e.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+
+  return isWide;
+}
+
 export function AdCarousel() {
   const { banners } = useSponsorBanners();
+  const isWide = useIsWide();
   const slides = banners.length > 0 ? banners : PLACEHOLDER_SLIDES;
 
   const [index, setIndex] = useState(0);
@@ -41,10 +60,14 @@ export function AdCarousel() {
   }, [slides.length, index]);
 
   const slide = slides[index];
-  const image = slide.placeholder ? null : slide.image16x9?.url;
+  const image = slide.placeholder
+    ? null
+    : (isWide ? slide.image16x9?.url : slide.image9x16?.url) || slide.image16x9?.url || slide.image9x16?.url;
 
   const inner = (
-    <div className={`ad-box ${waving ? 'ad-box--waving' : ''}`}>
+    <div className={`ad-box ${isWide ? 'ad-box--wide' : 'ad-box--tall'} ${waving ? 'ad-box--waving' : ''}`}>
+      <span className="ad-box__tag">Ad</span>
+
       {image ? (
         <img src={image} alt={slide.title || 'Sponsor'} className="ad-box__img" />
       ) : (
@@ -71,15 +94,25 @@ export function AdCarousel() {
     </div>
   );
 
+  // Real banners link out to their sponsor; placeholders link to the
+  // advertise/contact section so the slot is clickable even before any
+  // banners exist.
+  const href = slide.placeholder ? '#contact' : slide.linkUrl;
+  const isExternal = !slide.placeholder && Boolean(slide.linkUrl);
+
   return (
     <section className="ad-carousel" aria-label="Sponsored">
       <div className="container ad-carousel__inner">
-        {slide.placeholder || !slide.linkUrl ? (
-          inner
-        ) : (
-          <a href={slide.linkUrl} target="_blank" rel="noopener noreferrer sponsored" className="ad-carousel__link">
+        {href ? (
+          <a
+            href={href}
+            className="ad-carousel__link"
+            {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer sponsored' } : {})}
+          >
             {inner}
           </a>
+        ) : (
+          inner
         )}
       </div>
     </section>
