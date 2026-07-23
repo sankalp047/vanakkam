@@ -11,7 +11,11 @@ const PLACEHOLDER_SLIDES = [
 ];
 
 const ROTATE_MS = 5000;
-const WAVE_MS = 850;
+const WAVE_MS = 1000;
+
+// A tall wavy vertical band (sine edges) — three copies sweep across the box.
+const WAVE_BAND =
+  'M15,-8 C3,14 27,22 15,38 C3,54 27,62 15,78 C3,94 27,102 15,116 L35,116 C23,102 47,94 35,78 C23,62 47,54 35,38 C23,22 47,14 35,-8 Z';
 
 export function AdCarousel() {
   const { banners } = useSponsorBanners();
@@ -24,8 +28,8 @@ export function AdCarousel() {
     if (slides.length <= 1) return undefined;
     const rotate = setInterval(() => {
       setWaving(true);
-      // swap the image while the wave covers the box
-      setTimeout(() => setIndex((i) => (i + 1) % slides.length), WAVE_MS / 2);
+      // swap the image as the wave crosses the middle of the box
+      setTimeout(() => setIndex((i) => (i + 1) % slides.length), Math.round(WAVE_MS * 0.48));
       setTimeout(() => setWaving(false), WAVE_MS);
     }, ROTATE_MS);
     return () => clearInterval(rotate);
@@ -52,10 +56,10 @@ export function AdCarousel() {
       )}
 
       <div className="ad-wave" aria-hidden="true">
-        <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
-          <path className="ad-wave__path ad-wave__path--1" d="M0,150 C200,90 400,210 600,150 C800,90 1000,210 1200,150 L1200,300 L0,300 Z" />
-          <path className="ad-wave__path ad-wave__path--2" d="M0,170 C200,110 400,230 600,170 C800,110 1000,230 1200,170 L1200,300 L0,300 Z" />
-          <path className="ad-wave__path ad-wave__path--3" d="M0,190 C200,130 400,250 600,190 C800,130 1000,250 1200,190 L1200,300 L0,300 Z" />
+        <svg viewBox="0 0 120 100" preserveAspectRatio="none">
+          <path className="ad-wave__band ad-wave__band--1" d={WAVE_BAND} />
+          <path className="ad-wave__band ad-wave__band--2" d={WAVE_BAND} />
+          <path className="ad-wave__band ad-wave__band--3" d={WAVE_BAND} />
         </svg>
       </div>
 
