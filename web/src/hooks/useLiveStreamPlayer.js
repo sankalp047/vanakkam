@@ -35,26 +35,29 @@ export function useLiveStreamPlayer() {
     audio.addEventListener('stalled', onStalled);
     audio.addEventListener('error', onError);
 
-    // Attempt autoplay immediately on landing.
-    setStatus('loading');
+    // Attempt autoplay immediately on landing — production only, so local
+    // dev (constant reloads/HMR) doesn't blast live radio on every save.
     let cancelled = false;
     let cleanupInteractionListeners = () => {};
 
-    audio.play().catch(() => {
-      if (cancelled) return;
-      setStatus('paused');
+    if (import.meta.env.PROD) {
+      setStatus('loading');
+      audio.play().catch(() => {
+        if (cancelled) return;
+        setStatus('paused');
 
-      // Blocked by the browser's autoplay policy — start on the first
-      // interaction anywhere on the page instead, then stop listening.
-      const startOnInteraction = () => {
-        audio.play().catch(() => {});
-        cleanupInteractionListeners();
-      };
-      INTERACTION_EVENTS.forEach((evt) => document.addEventListener(evt, startOnInteraction, { once: true, passive: true }));
-      cleanupInteractionListeners = () => {
-        INTERACTION_EVENTS.forEach((evt) => document.removeEventListener(evt, startOnInteraction));
-      };
-    });
+        // Blocked by the browser's autoplay policy — start on the first
+        // interaction anywhere on the page instead, then stop listening.
+        const startOnInteraction = () => {
+          audio.play().catch(() => {});
+          cleanupInteractionListeners();
+        };
+        INTERACTION_EVENTS.forEach((evt) => document.addEventListener(evt, startOnInteraction, { once: true, passive: true }));
+        cleanupInteractionListeners = () => {
+          INTERACTION_EVENTS.forEach((evt) => document.removeEventListener(evt, startOnInteraction));
+        };
+      });
+    }
 
     return () => {
       cancelled = true;
