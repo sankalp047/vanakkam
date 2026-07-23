@@ -1,0 +1,167 @@
+.ad-carousel {
+  padding-block: var(--space-xl);
+  background: var(--color-bg);
+}
+
+.ad-carousel__inner {
+  display: flex;
+  justify-content: center;
+}
+
+.ad-carousel__link {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+}
+
+.ad-box {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  max-height: 300px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 2px solid var(--color-border-strong);
+  background: var(--color-ink);
+}
+
+.ad-box__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease, transform 0.6s ease;
+}
+
+.ad-box--waving .ad-box__img {
+  filter: saturate(1.3);
+}
+
+.ad-box__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  text-align: center;
+  padding: var(--space-lg);
+  background: linear-gradient(120deg, var(--color-ink) 0%, #2a1410 60%, var(--color-primary-dark) 130%);
+}
+
+.ad-box__ph-kicker {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+.ad-box__ph-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.3rem, 3.5vw, 2.2rem);
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+}
+
+.ad-box__ph-sub {
+  font-family: var(--font-serif);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+}
+
+/* Wave transition overlay — rises over the box while the image swaps */
+.ad-wave {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.ad-wave svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ad-box--waving .ad-wave {
+  animation: ad-wave-rise 0.85s ease-in-out;
+}
+
+@keyframes ad-wave-rise {
+  0% {
+    opacity: 1;
+    transform: translateY(100%);
+  }
+  45% {
+    opacity: 1;
+    transform: translateY(-6%);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-6%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-110%);
+  }
+}
+
+.ad-wave__path {
+  opacity: 0.9;
+}
+
+.ad-wave__path--1 {
+  fill: var(--color-primary);
+}
+.ad-wave__path--2 {
+  fill: var(--color-secondary);
+  opacity: 0.85;
+}
+.ad-wave__path--3 {
+  fill: var(--color-lime);
+  opacity: 0.8;
+}
+
+.ad-box--waving .ad-wave__path {
+  animation: ad-wave-wobble 0.85s ease-in-out;
+}
+
+@keyframes ad-wave-wobble {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4%);
+  }
+}
+
+.ad-box__dots {
+  position: absolute;
+  bottom: var(--space-2xs);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.ad-box__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.ad-box__dot--active {
+  background: #fff;
+  width: 20px;
+  border-radius: var(--radius-full);
+}

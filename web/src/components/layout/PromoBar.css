@@ -1,0 +1,97 @@
+.promo-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: calc(var(--z-fixed) + 1);
+  /* Acid-lime default, like the KCRW promo strip; overridable from admin */
+  background: var(--color-lime);
+  color: var(--color-ink);
+}
+
+.promo-bar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  min-height: 44px;
+  padding-block: 0.4rem;
+}
+
+.promo-bar__text {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2xs);
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.promo-bar__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.promo-bar__msg {
+  font-size: 0.86rem;
+  opacity: 0.9;
+}
+
+.promo-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.promo-bar__cta {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.promo-bar__cta:hover {
+  background: var(--color-ink);
+  color: var(--color-lime);
+  border-color: var(--color-ink);
+}
+
+.promo-bar__close {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.promo-bar__close:hover {
+  background: #000;
+}
+
+@media (max-width: 640px) {
+  .promo-bar__msg {
+    display: none;
+  }
+
+  .promo-bar__inner {
+    gap: var(--space-2xs);
+  }
+
+  .promo-bar__cta {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.72rem;
+  }
+}

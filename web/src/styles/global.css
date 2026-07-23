@@ -30,8 +30,8 @@ body {
 
 .site-main {
   flex: 1;
-  /* clear the fixed nav + sticky on-air bar */
-  padding-top: calc(var(--nav-height) + var(--onair-height));
+  /* clear the promo bar (0 when absent) + fixed nav + on-air bar */
+  padding-top: calc(var(--promo-height, 0px) + var(--nav-height) + var(--onair-height));
 }
 
 ul,

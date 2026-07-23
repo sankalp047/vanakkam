@@ -1,6 +1,6 @@
 .onair-bar {
   position: fixed;
-  top: var(--nav-height);
+  top: calc(var(--promo-height, 0px) + var(--nav-height));
   left: 0;
   right: 0;
   z-index: calc(var(--z-fixed) - 1);

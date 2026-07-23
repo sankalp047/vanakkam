@@ -32,6 +32,13 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // Editable site config (e.g. the promo bar) — public read so the site
+    // can render it, admin-only writes from the dashboard.
+    match /config/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
     // Presence-only allowlist of admin UIDs. Managed out-of-band (Firebase
     // console / a one-off script) — never writable from the app itself.
     match /admins/{uid} {

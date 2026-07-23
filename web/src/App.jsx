@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { PlayerProvider } from './context/PlayerProvider';
 import { AuthProvider } from './context/AuthProvider';
+import { PromoBar } from './components/layout/PromoBar';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { AdminGuard } from './components/layout/AdminGuard';
@@ -13,12 +14,14 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { AdminLoginPage } from './pages/admin/AdminLoginPage';
 import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
 import { AdminBannersPage } from './pages/admin/AdminBannersPage';
+import { AdminPromoPage } from './pages/admin/AdminPromoPage';
 import { AdminPodcastsPage } from './pages/admin/AdminPodcastsPage';
 import { AdminInboxPage } from './pages/admin/AdminInboxPage';
 
 function SiteLayout({ children }) {
   return (
     <>
+      <PromoBar />
       <Navbar />
       <LiveStreamBar />
       <main className="site-main">{children}</main>
@@ -41,6 +44,7 @@ export default function App() {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboardPage />} />
               <Route path="banners" element={<AdminBannersPage />} />
+              <Route path="promo" element={<AdminPromoPage />} />
               <Route path="podcasts" element={<AdminPodcastsPage />} />
               <Route path="inbox" element={<AdminInboxPage />} />
             </Route>

@@ -84,3 +84,123 @@
   padding: var(--space-lg);
   text-align: center;
 }
+
+/* Forms (promo bar, etc.) */
+.admin-help {
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+  margin-bottom: var(--space-lg);
+  font-size: 0.92rem;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 640px;
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-field > span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+.admin-field input[type='text'],
+.admin-field input[type='url'] {
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-ink);
+}
+
+.admin-field input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.admin-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.admin-field--color input[type='color'] {
+  width: 100%;
+  height: 42px;
+  padding: 2px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.admin-check {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-weight: 600;
+}
+
+.admin-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+}
+
+.admin-form__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.admin-saved {
+  color: #1c7a3f;
+  font-weight: 600;
+}
+
+.admin-promo-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.admin-promo-preview__text {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2xs);
+  flex-wrap: wrap;
+}
+
+.admin-promo-preview__text strong {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.admin-promo-preview__cta {
+  padding: 0.3rem 0.8rem;
+  border: 1.5px solid;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .admin-field-row {
+    grid-template-columns: 1fr;
+  }
+}
