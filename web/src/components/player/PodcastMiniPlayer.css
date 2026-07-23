@@ -6,12 +6,40 @@
   z-index: var(--z-fixed);
   background: var(--color-chrome);
   color: var(--color-chrome-text);
-  border-top: 2px solid var(--color-primary);
+  border-top: 1px solid var(--color-chrome-border);
+}
+
+/* Full-width seek bar across the very top of the player */
+.podcast-bar__seek {
+  display: block;
+  width: 100%;
+  height: 5px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.14);
+  position: relative;
+  cursor: pointer;
+}
+
+.podcast-bar__seek::after {
+  /* larger invisible hit area for easier grabbing */
+  content: '';
+  position: absolute;
+  inset: -6px 0;
+}
+
+.podcast-bar__seek-fill {
+  height: 100%;
+  background: var(--color-primary);
+  transition: width 0.1s linear;
+}
+
+.podcast-bar__seek:hover .podcast-bar__seek-fill {
+  background: var(--color-primary-light);
 }
 
 .podcast-bar__inner {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 260px) auto;
+  grid-template-columns: auto minmax(0, 1fr) auto auto minmax(0, 160px);
   align-items: center;
   gap: var(--space-md);
   min-height: calc(var(--podcast-bar-height) - 0.5rem);
@@ -83,33 +111,22 @@
   background: var(--color-primary-dark);
 }
 
-.podcast-bar__progress-wrap {
+.podcast-bar__times {
   display: flex;
   align-items: center;
-  gap: var(--space-2xs);
-}
-
-.podcast-bar__time {
-  font-size: 0.72rem;
-  color: var(--color-chrome-text-muted);
+  gap: 0.35rem;
   font-variant-numeric: tabular-nums;
-  width: 40px;
+  font-size: 0.78rem;
+  color: var(--color-chrome-text);
+  white-space: nowrap;
 }
 
-.podcast-bar__progress {
-  flex: 1;
-  height: 4px;
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.15);
-  cursor: pointer;
-  position: relative;
+.podcast-bar__time-sep {
+  color: var(--color-chrome-text-muted);
 }
 
-.podcast-bar__progress-fill {
-  position: absolute;
-  inset: 0 auto 0 0;
-  border-radius: var(--radius-full);
-  background: var(--color-primary);
+.podcast-bar__time--muted {
+  color: var(--color-chrome-text-muted);
 }
 
 .podcast-bar__volume {
@@ -163,24 +180,9 @@
 @media (max-width: 860px) {
   .podcast-bar__inner {
     grid-template-columns: auto minmax(0, 1fr) auto;
-    grid-template-areas:
-      'art meta ctrl'
-      'progress progress progress';
-    row-gap: var(--space-2xs);
   }
 
-  .podcast-bar__art-btn {
-    grid-area: art;
-  }
-  .podcast-bar__meta {
-    grid-area: meta;
-  }
-  .podcast-bar__controls {
-    grid-area: ctrl;
-  }
-  .podcast-bar__progress-wrap {
-    grid-area: progress;
-  }
+  .podcast-bar__times,
   .podcast-bar__volume {
     display: none;
   }

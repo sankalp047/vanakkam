@@ -24,6 +24,15 @@ export function PodcastMiniPlayer() {
 
   return (
     <div className={`podcast-bar ${podcast.isExpanded ? 'podcast-bar--expanded' : ''}`}>
+      <button
+        type="button"
+        className="podcast-bar__seek"
+        onClick={handleSeek}
+        aria-label="Seek"
+      >
+        <div className="podcast-bar__seek-fill" style={{ width: `${progress}%` }} />
+      </button>
+
       {podcast.isExpanded && (
         <div className="podcast-bar__expanded">
           <button type="button" className="podcast-bar__collapse" onClick={podcast.collapse} aria-label="Collapse player">
@@ -67,12 +76,10 @@ export function PodcastMiniPlayer() {
           </button>
         </div>
 
-        <div className="podcast-bar__progress-wrap">
+        <div className="podcast-bar__times">
           <span className="podcast-bar__time">{formatTime(podcast.currentTime)}</span>
-          <div className="podcast-bar__progress" onClick={handleSeek}>
-            <div className="podcast-bar__progress-fill" style={{ width: `${progress}%` }} />
-          </div>
-          <span className="podcast-bar__time">{formatTime(podcast.duration)}</span>
+          <span className="podcast-bar__time-sep">/</span>
+          <span className="podcast-bar__time podcast-bar__time--muted">{formatTime(podcast.duration)}</span>
         </div>
 
         <input

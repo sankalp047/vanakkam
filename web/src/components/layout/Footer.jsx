@@ -51,9 +51,9 @@ export function Footer() {
           <div className="footer__col">
             <h4>Contact</h4>
             <ul>
-              <li>Studio: +1 (912) 345-6789</li>
-              <li>Sales: +1 (912) 345-6789</li>
-              <li>hello@vanakkamfm.net</li>
+              <li>Studio: (469) 293-7222</li>
+              <li>Sales: (469) 424-3188</li>
+              <li>sales@funasia.net</li>
             </ul>
           </div>
           <div className="footer__col">

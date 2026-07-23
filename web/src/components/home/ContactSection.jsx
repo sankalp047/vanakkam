@@ -18,15 +18,15 @@ export function ContactSection() {
           <div className="contact-info__list">
             <div className="contact-info__item">
               <span className="contact-info__label">Sales</span>
-              <span>+1 (912) 345-6789</span>
+              <a href="tel:+14694243188">(469) 424-3188</a>
             </div>
             <div className="contact-info__item">
               <span className="contact-info__label">Studio</span>
-              <span>+1 (912) 345-6789</span>
+              <a href="tel:+14692937222">(469) 293-7222</a>
             </div>
             <div className="contact-info__item">
               <span className="contact-info__label">Email</span>
-              <span>hello@vanakkamfm.net</span>
+              <a href="mailto:sales@funasia.net">sales@funasia.net</a>
             </div>
             <div className="contact-info__item">
               <span className="contact-info__label">Address</span>

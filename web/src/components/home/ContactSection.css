@@ -52,8 +52,13 @@
   letter-spacing: 0.1em;
 }
 
-.contact-info__item > span:last-child {
+.contact-info__item > span:last-child,
+.contact-info__item > a {
   color: var(--color-bg);
+}
+
+.contact-info__item > a:hover {
+  color: var(--color-primary-light);
 }
 
 @media (max-width: 860px) {

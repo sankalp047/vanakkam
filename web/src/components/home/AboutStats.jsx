@@ -82,9 +82,9 @@ export function AboutStats() {
         </div>
 
         <div className="about-visual" aria-hidden="true">
-          <div className="about-img about-img--1">🎙️</div>
-          <div className="about-img about-img--2">🎧</div>
-          <div className="about-img about-img--3">🎶</div>
+          <div className="about-img about-img--1" style={{ backgroundImage: 'url(/rj/janani.jpg)' }} />
+          <div className="about-img about-img--2" style={{ backgroundImage: 'url(/rj/lucky.jpg)' }} />
+          <div className="about-img about-img--3">104.9<span>HD2</span></div>
         </div>
       </div>
     </section>
