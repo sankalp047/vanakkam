@@ -12,46 +12,43 @@
   gap: var(--space-xl);
 }
 
-/* Phone mockups (placeholder) */
+/* Phone mockups — real BigFan app screenshots */
 .bigfan__phones {
   position: relative;
-  width: 190px;
-  height: 200px;
+  width: 260px;
+  height: 280px;
   flex-shrink: 0;
 }
 
 .bigfan__phone {
   position: absolute;
-  width: 108px;
-  aspect-ratio: 9 / 19;
-  border-radius: 18px;
+  width: 150px;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 22px;
   background: var(--color-chrome-soft);
   border: 3px solid #000;
   box-shadow: var(--shadow-lg);
-  display: grid;
-  place-items: center;
   overflow: hidden;
 }
 
 .bigfan__phone img {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  opacity: 0.9;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .bigfan__phone--back {
   top: 0;
-  left: 18px;
+  left: 8px;
   transform: rotate(-8deg);
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 .bigfan__phone--front {
   bottom: 0;
-  right: 0;
+  right: 8px;
   transform: rotate(5deg);
-  background: linear-gradient(160deg, var(--color-primary) 0%, var(--color-chrome-soft) 90%);
 }
 
 .bigfan__copy {

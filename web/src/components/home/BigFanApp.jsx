@@ -10,12 +10,11 @@ export function BigFanApp() {
     <section className="bigfan" aria-label="Download the BigFan app">
       <div className="container bigfan__inner">
         <div className="bigfan__phones" aria-hidden="true">
-          {/* Placeholder phone mockups — swap for real app screenshots */}
           <div className="bigfan__phone bigfan__phone--back">
-            <img src="/logo.png" alt="" />
+            <img src="/bigfan/screenshot-2.jpg" alt="" />
           </div>
           <div className="bigfan__phone bigfan__phone--front">
-            <img src="/logo.png" alt="" />
+            <img src="/bigfan/screenshot-1.jpg" alt="" />
           </div>
         </div>
 
