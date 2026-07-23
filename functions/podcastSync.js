@@ -121,10 +121,16 @@ async function syncOneFeed(feed, db) {
   }
 }
 
-exports.podcastSync = onSchedule("every 30 minutes", async () => {
+/**
+ * Fetches all RJ feeds and upserts them into Firestore in one batch.
+ * Shared by the scheduled function and the one-off backfill script so the
+ * two can never drift.
+ * @param {admin.firestore.Firestore} db Firestore instance.
+ * @return {Promise<{okCount: number, errorCount: number}>} Sync summary.
+ */
+async function runPodcastSync(db) {
   console.log("🎙️ podcastSync: starting sync of", RJ_FEEDS.length, "RJ feeds");
 
-  const db = admin.firestore();
   const results = await Promise.allSettled(RJ_FEEDS.map((feed) => syncOneFeed(feed, db)));
 
   const batch = db.batch();
@@ -158,4 +164,11 @@ exports.podcastSync = onSchedule("every 30 minutes", async () => {
 
   await batch.commit();
   console.log(`✅ podcastSync: done — ${okCount} ok, ${errorCount} failed`);
+  return {okCount, errorCount};
+}
+
+exports.runPodcastSync = runPodcastSync;
+
+exports.podcastSync = onSchedule("every 30 minutes", async () => {
+  await runPodcastSync(admin.firestore());
 });
