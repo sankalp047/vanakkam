@@ -1,5 +1,25 @@
 .admin-page__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
   margin-bottom: var(--space-lg);
+  position: relative;
+  padding-bottom: var(--space-sm);
+}
+
+.admin-page__title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  height: 4px;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+.admin-section-title {
+  font-size: 1.1rem;
+  margin: var(--space-xl) 0 var(--space-sm);
 }
 
 .admin-cards {
@@ -11,28 +31,39 @@
 
 .admin-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
 }
 
 .admin-card__value {
-  font-family: var(--font-heading);
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--color-primary);
 }
 
 .admin-card__label {
+  font-family: var(--font-heading);
   color: var(--color-text-muted);
-  font-size: 0.85rem;
-  margin-top: 4px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: var(--space-2xs);
+}
+
+.admin-note {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
 }
 
 .admin-table {
   width: 100%;
   border-collapse: collapse;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   overflow: hidden;
 }
@@ -40,17 +71,20 @@
 .admin-table th,
 .admin-table td {
   text-align: left;
-  padding: 0.8rem 1rem;
+  padding: 0.85rem 1rem;
   font-size: 0.88rem;
   border-bottom: 1px solid var(--color-border);
 }
 
 .admin-table th {
-  color: var(--color-text-muted);
-  font-weight: 600;
-  font-size: 0.78rem;
+  background: var(--color-chrome);
+  color: var(--color-chrome-text-muted);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
+  border-bottom: none;
 }
 
 .admin-table tr:last-child td {
@@ -63,26 +97,50 @@
 
 .admin-badge {
   display: inline-block;
-  padding: 0.25rem 0.6rem;
+  padding: 0.28rem 0.7rem;
   border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--color-bg-alt);
+  color: var(--color-text-muted);
 }
 
 .admin-badge--ok {
-  background: rgba(72, 187, 120, 0.15);
-  color: #6ee7a8;
+  background: rgba(43, 150, 80, 0.12);
+  color: #1c7a3f;
 }
 
 .admin-badge--error {
-  background: rgba(255, 68, 68, 0.15);
-  color: #ff8080;
+  background: rgba(230, 51, 37, 0.12);
+  color: var(--color-primary-dark);
 }
 
 .admin-empty {
   color: var(--color-text-muted);
   padding: var(--space-lg);
   text-align: center;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.admin-select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-ink);
+  font-size: 0.9rem;
+}
+
+.admin-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
 }
 
 /* Forms (promo bar, etc.) */
@@ -107,10 +165,11 @@
 }
 
 .admin-field > span {
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   color: var(--color-text-secondary);
 }
 
@@ -174,7 +233,7 @@
   gap: var(--space-md);
   padding: 0.6rem 1rem;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border-strong);
 }
 
 .admin-promo-preview__text {
@@ -185,6 +244,7 @@
 }
 
 .admin-promo-preview__text strong {
+  font-family: var(--font-heading);
   text-transform: uppercase;
   font-size: 0.9rem;
 }
@@ -193,6 +253,7 @@
   padding: 0.3rem 0.8rem;
   border: 1.5px solid;
   border-radius: var(--radius-full);
+  font-family: var(--font-heading);
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;

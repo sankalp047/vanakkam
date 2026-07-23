@@ -149,7 +149,7 @@ export function AdminBannersPage() {
         </button>
       </div>
 
-      <h2 style={{ margin: 'var(--space-xl) 0 var(--space-sm)' }}>Current Banners</h2>
+      <h2 className="admin-section-title">Current Banners</h2>
       {banners.length === 0 ? (
         <p className="admin-empty">No banners yet.</p>
       ) : (

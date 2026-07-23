@@ -15,9 +15,9 @@
 
 .contact-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: var(--space-2xl);
-  align-items: start;
+  align-items: center;
 }
 
 .contact-info__desc {
@@ -27,6 +27,24 @@
   font-family: var(--font-serif);
   font-size: 1.1rem;
   color: rgba(241, 241, 234, 0.75);
+}
+
+.contact-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.contact-cta .btn-secondary {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--color-bg);
+}
+
+.contact-cta .btn-secondary:hover {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  border-color: var(--color-bg);
 }
 
 .contact-info__list {

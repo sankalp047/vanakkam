@@ -1,0 +1,65 @@
+.advertise-wave {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+.advertise-wave svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.advertise-wave__path {
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.7s ease;
+}
+
+/* Illustration sits on the dark contact-section background, so the line
+   art itself needs to be light, not "ink" colored. */
+.advertise-wave__path--handle,
+.advertise-wave__path--horn {
+  stroke: var(--color-bg);
+}
+
+.advertise-wave__path--horn {
+  transition: stroke-dashoffset 0.7s ease, fill 0.35s ease 0.65s;
+}
+
+.advertise-wave--in-view .advertise-wave__path--horn {
+  fill: var(--color-chrome-soft);
+}
+
+.advertise-wave__path--arc1 {
+  stroke: var(--color-primary);
+}
+.advertise-wave__path--arc2 {
+  stroke: var(--color-secondary);
+}
+.advertise-wave__path--arc3 {
+  stroke: var(--color-lime);
+}
+
+.advertise-wave--in-view .advertise-wave__path {
+  stroke-dashoffset: 0;
+}
+
+.advertise-wave--in-view .advertise-wave__path--handle {
+  transition-delay: 0s;
+}
+.advertise-wave--in-view .advertise-wave__path--horn {
+  transition-delay: 0.15s;
+}
+.advertise-wave--in-view .advertise-wave__path--arc1 {
+  transition-delay: 0.55s;
+}
+.advertise-wave--in-view .advertise-wave__path--arc2 {
+  transition-delay: 0.72s;
+}
+.advertise-wave--in-view .advertise-wave__path--arc3 {
+  transition-delay: 0.89s;
+}

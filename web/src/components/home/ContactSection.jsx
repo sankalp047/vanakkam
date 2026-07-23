@@ -1,4 +1,4 @@
-import { ContactForm } from './ContactForm';
+import { AdvertiseWave } from './AdvertiseWave';
 import './ContactSection.css';
 
 export function ContactSection() {
@@ -6,27 +6,28 @@ export function ContactSection() {
     <section className="contact-section" id="contact">
       <div className="container contact-grid">
         <div className="contact-info">
-          <span className="section-tag">Get in Touch</span>
+          <span className="section-tag">Advertise With Us</span>
           <h2>
-            Contact <span className="highlight">Us</span>
+            Reach Thousands of <span className="highlight">Tamil Listeners</span>
           </h2>
           <p className="contact-info__desc">
-            Want to advertise on the radio? Have a song request, a shoutout, or just want to say வணக்கம்? We'd love
-            to hear from you!
+            Want your business on 104.9 HD2? Have a song request, a shoutout, or just want to say வணக்கம்? Skip the
+            forms — call or email our sales team directly.
           </p>
+
+          <div className="contact-cta">
+            <a href="mailto:sales@funasia.net" className="btn btn-primary">
+              Email Sales
+            </a>
+            <a href="tel:+14694243188" className="btn btn-secondary">
+              Call (469) 424-3188
+            </a>
+          </div>
 
           <div className="contact-info__list">
             <div className="contact-info__item">
-              <span className="contact-info__label">Sales</span>
-              <a href="tel:+14694243188">(469) 424-3188</a>
-            </div>
-            <div className="contact-info__item">
               <span className="contact-info__label">Studio</span>
               <a href="tel:+14692937222">(469) 293-7222</a>
-            </div>
-            <div className="contact-info__item">
-              <span className="contact-info__label">Email</span>
-              <a href="mailto:sales@funasia.net">sales@funasia.net</a>
             </div>
             <div className="contact-info__item">
               <span className="contact-info__label">Address</span>
@@ -35,7 +36,7 @@ export function ContactSection() {
           </div>
         </div>
 
-        <ContactForm />
+        <AdvertiseWave />
       </div>
     </section>
   );

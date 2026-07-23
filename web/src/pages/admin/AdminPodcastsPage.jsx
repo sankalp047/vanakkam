@@ -47,7 +47,7 @@ export function AdminPodcastsPage() {
     <div>
       <h1 className="admin-page__title">Podcast Sync Status</h1>
 
-      <div className="admin-table-wrap" style={{ marginBottom: 'var(--space-xl)' }}>
+      <div className="admin-table-wrap">
         <table className="admin-table">
           <thead>
             <tr>
@@ -83,19 +83,19 @@ export function AdminPodcastsPage() {
         </table>
       </div>
 
-      <h2 style={{ marginBottom: 'var(--space-sm)' }}>Episode Artwork Override</h2>
-      <form className="admin-card" onSubmit={handleSave} style={{ maxWidth: 480, display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-        {message && <p style={{ color: 'var(--color-text-secondary)' }}>{message}</p>}
+      <h2 className="admin-section-title">Episode Artwork Override</h2>
+      <form className="admin-card admin-form" onSubmit={handleSave}>
+        {message && <p className="admin-note">{message}</p>}
 
-        <label>
-          RJ
+        <label className="admin-field">
+          <span>RJ</span>
           <select
+            className="admin-select"
             value={selectedSlug}
             onChange={(e) => {
               setSelectedSlug(e.target.value);
               setSelectedGuid('');
             }}
-            style={{ display: 'block', width: '100%', marginTop: 4, padding: '0.6rem', borderRadius: 8 }}
           >
             <option value="">Select an RJ…</option>
             {RJ_ROSTER.map((rj) => (
@@ -106,13 +106,13 @@ export function AdminPodcastsPage() {
           </select>
         </label>
 
-        <label>
-          Episode
+        <label className="admin-field">
+          <span>Episode</span>
           <select
+            className="admin-select"
             value={selectedGuid}
             onChange={(e) => setSelectedGuid(e.target.value)}
             disabled={!episodes.length}
-            style={{ display: 'block', width: '100%', marginTop: 4, padding: '0.6rem', borderRadius: 8 }}
           >
             <option value="">Select an episode…</option>
             {episodes.map((ep) => (
@@ -123,14 +123,13 @@ export function AdminPodcastsPage() {
           </select>
         </label>
 
-        <label>
-          Artwork URL
+        <label className="admin-field">
+          <span>Artwork URL</span>
           <input
             type="url"
             value={overrideUrl}
             onChange={(e) => setOverrideUrl(e.target.value)}
             placeholder="https://…"
-            style={{ display: 'block', width: '100%', marginTop: 4, padding: '0.6rem', borderRadius: 8 }}
           />
         </label>
 

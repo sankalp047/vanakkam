@@ -23,8 +23,8 @@ export function AdminLayout() {
     <div className="admin-layout">
       <aside className="admin-layout__sidebar">
         <div className="admin-layout__brand">
-          <img src="/logo.png" alt="" />
-          <span>Vanakkam FM Admin</span>
+          <img src="/logo.png" alt="Vanakkam FM" />
+          <span className="admin-layout__brand-tag">Admin</span>
         </div>
         <nav className="admin-layout__nav">
           {LINKS.map((link) => (

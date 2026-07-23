@@ -36,11 +36,7 @@ export function AdminDashboardPage() {
           <div className="admin-card__label">Contact Messages</div>
         </div>
       </div>
-      {lastSynced && (
-        <p style={{ color: 'var(--color-text-muted)' }}>
-          Last podcast sync: {new Date(lastSynced).toLocaleString()}
-        </p>
-      )}
+      {lastSynced && <p className="admin-note">Last podcast sync: {new Date(lastSynced).toLocaleString()}</p>}
     </div>
   );
 }
