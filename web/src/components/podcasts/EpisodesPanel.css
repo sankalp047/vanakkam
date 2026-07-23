@@ -1,7 +1,7 @@
 .episodes-panel-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(20, 17, 15, 0.55);
   backdrop-filter: blur(4px);
   z-index: var(--z-modal);
   display: flex;
@@ -9,10 +9,10 @@
 }
 
 .episodes-panel {
-  width: min(420px, 100vw);
+  width: min(440px, 100vw);
   height: 100%;
-  background: var(--color-bg-elevated);
-  border-left: 1px solid var(--color-border);
+  background: var(--color-chrome);
+  color: var(--color-chrome-text);
   display: flex;
   flex-direction: column;
   animation: episodes-panel-in var(--transition-normal);
@@ -32,7 +32,7 @@
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-chrome-border);
 }
 
 .episodes-panel__image {
@@ -43,12 +43,17 @@
 }
 
 .episodes-panel__header h3 {
-  font-size: 1.1rem;
+  color: #fff;
+  font-size: 1.2rem;
 }
 
 .episodes-panel__header p {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-secondary);
 }
 
 .episodes-panel__close {
@@ -56,7 +61,8 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
   flex-shrink: 0;
 }
 
@@ -69,7 +75,7 @@
 .episodes-panel__empty {
   padding: var(--space-2xl) var(--space-md);
   text-align: center;
-  color: var(--color-text-muted);
+  color: var(--color-chrome-text-muted);
 }
 
 .episode-row {
@@ -84,11 +90,11 @@
 }
 
 .episode-row:hover {
-  background: var(--color-surface-hover);
+  background: var(--color-chrome-soft);
 }
 
 .episode-row--active {
-  background: rgba(255, 77, 109, 0.12);
+  background: rgba(230, 51, 37, 0.16);
 }
 
 .episode-row__play {
@@ -98,13 +104,14 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--color-surface);
-  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.8rem;
 }
 
 .episode-row--active .episode-row__play {
-  background: var(--gradient-sunset);
-  color: #1a0a10;
+  background: var(--color-primary);
+  color: #fff;
 }
 
 .episode-row__meta {
@@ -116,12 +123,13 @@
 .episode-row__title {
   font-size: 0.9rem;
   font-weight: 500;
+  color: var(--color-chrome-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .episode-row__sub {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
+  font-size: 0.76rem;
+  color: var(--color-chrome-text-muted);
 }

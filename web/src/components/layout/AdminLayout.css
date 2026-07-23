@@ -6,7 +6,7 @@
 }
 
 .admin-layout__sidebar {
-  background: var(--color-bg-elevated);
+  background: var(--color-bg-alt);
   border-right: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@
 }
 
 .admin-layout__link:hover {
-  background: var(--color-surface-hover);
+  background: var(--color-bg-alt);
   color: var(--color-text);
 }
 

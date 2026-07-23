@@ -3,12 +3,6 @@ import './Footer.css';
 export function Footer() {
   return (
     <footer className="footer" id="footer">
-      <div className="footer__wave" aria-hidden="true">
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-          <path d="M0,40 C480,100 960,0 1440,60 L1440,100 L0,100 Z" fill="currentColor" />
-        </svg>
-      </div>
-
       <div className="container footer__main">
         <div className="footer__brand">
           <div className="footer__logo">

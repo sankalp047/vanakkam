@@ -2,94 +2,81 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { usePlayerContext } from '../../context/PlayerContext';
+import { useOnAirNow } from '../../hooks/useOnAirNow';
+import { RJ_ROSTER } from '../../lib/rjRoster';
 import './Hero.css';
 
 gsap.registerPlugin(useGSAP);
 
+const FALLBACK_FEATURE = RJ_ROSTER[0];
+
 export function Hero() {
   const { live } = usePlayerContext();
+  const onAir = useOnAirNow();
   const rootRef = useRef(null);
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-      tl.to('.hero__subtitle', { opacity: 1, y: 0, duration: 0.7 })
-        .to('.hero__title', { opacity: 1, y: 0, duration: 0.9 }, '-=0.45')
-        .to('.hero__tagline', { opacity: 1, y: 0, duration: 0.7 }, '-=0.55')
-        .to('.hero__description', { opacity: 1, y: 0, duration: 0.7 }, '-=0.5')
-        .to('.hero__actions', { opacity: 1, y: 0, duration: 0.7 }, '-=0.45')
-        .to('.hero__visual', { opacity: 1, scale: 1, duration: 0.9, ease: 'back.out(1.6)' }, '-=0.6');
+      gsap.from('.hero__reveal', {
+        opacity: 0,
+        y: 28,
+        duration: 0.8,
+        stagger: 0.08,
+        ease: 'power3.out',
+      });
+      gsap.from('.hero__feature', {
+        opacity: 0,
+        y: 40,
+        duration: 0.9,
+        ease: 'power3.out',
+        delay: 0.2,
+      });
     },
     { scope: rootRef },
   );
 
+  const feature = onAir || FALLBACK_FEATURE;
   const isPlaying = live.status === 'playing';
 
   return (
-    <section className="hero" id="home" ref={rootRef}>
-      <div className="hero__bg" aria-hidden="true">
-        <div className="hero__wave hero__wave--1" />
-        <div className="hero__wave hero__wave--2" />
-        <div className="hero__wave hero__wave--3" />
-        <div className="hero__notes">
-          <span>♪</span>
-          <span>♫</span>
-          <span>♪</span>
-          <span>♫</span>
-          <span>♪</span>
-        </div>
-      </div>
-
-      <div className="hero__content container">
-        <div className="hero__text">
-          <p className="hero__subtitle">Welcome to</p>
-          <h1 className="hero__title">
-            Vanakkam <span className="gradient-text">FM</span>
+    <section className="hero" ref={rootRef}>
+      <div className="container hero__grid">
+        <div className="hero__intro">
+          <span className="hero__kicker hero__reveal">Now Broadcasting · 104.9 HD2 · Dallas–Fort Worth</span>
+          <h1 className="hero__title hero__reveal">
+            Vanakkam<span className="hero__title-fm">FM</span>
           </h1>
-          <p className="hero__tagline">டாலஸை தலைமையிடமாகக் கொண்ட அமெரிக்காவின் நம்பர் 1 தமிழ் ரேடியோ</p>
-          <p className="hero__description">
-            Your home for Tamil hits in Dallas–Fort Worth on 104.9 HD2. Live Radio Jockeys around the clock,
-            round-the-clock music, and culture that feels like home.
+          <p className="hero__tagline hero__reveal serif">
+            America's №1 Tamil radio — live RJs, nonstop hits, and culture that feels like home.
           </p>
+          <p className="hero__tamil hero__reveal">டாலஸை தலைமையிடமாகக் கொண்ட அமெரிக்காவின் நம்பர் 1 தமிழ் ரேடியோ</p>
 
-          <div className="hero__actions">
-            <a href="#shows" className="btn btn-primary">
-              <span>Explore Shows</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-            <button type="button" className="btn btn-secondary" onClick={live.toggle}>
-              <span>{isPlaying ? '⏸' : '▶'}</span>
-              <span>{isPlaying ? 'Pause Live' : 'Listen Live'}</span>
+          <div className="hero__actions hero__reveal">
+            <button type="button" className="btn btn-primary" onClick={live.toggle}>
+              {isPlaying ? '❚❚ Playing Live' : '▶ Listen Live'}
             </button>
+            <a href="#shows" className="btn btn-secondary">
+              Explore Shows
+            </a>
           </div>
         </div>
 
-        <div className="hero__visual">
-          <div className={`hero__player-ring ${isPlaying ? 'hero__player-ring--active' : ''}`}>
-            <div className="hero__player-ring-inner" />
-            <div className="hero__player-ring-inner" />
-            <div className="hero__player-ring-inner" />
-            <div className="hero__player-center">
-              <div className={`hero__equalizer ${isPlaying ? 'hero__equalizer--playing' : ''}`}>
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-              </div>
-              <p className="hero__now-playing">{isPlaying ? 'Now Playing' : 'Tap to Listen'}</p>
+        <button type="button" className="hero__feature" onClick={live.toggle} aria-label="Listen to what's on air now">
+          <div className="hero__feature-image" style={{ backgroundImage: `url(${feature.image})` }}>
+            <span className="hero__feature-badge">
+              <span className="hero__feature-dot" />
+              {onAir ? 'On Air Now' : 'Up Next'}
+            </span>
+            <div className="hero__feature-overlay">
+              <span className="hero__feature-kicker">{feature.days}</span>
+              <h2 className="hero__feature-show">{feature.show}</h2>
+              <p className="hero__feature-host">
+                with {feature.name} · {feature.time}
+              </p>
+              <span className="hero__feature-play">{isPlaying ? '❚❚ Playing' : '▶ Tune In'}</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="hero__scroll-indicator">
-        <div className="hero__mouse">
-          <div className="hero__wheel" />
-        </div>
-        <p>Scroll to explore</p>
+        </button>
       </div>
     </section>
   );

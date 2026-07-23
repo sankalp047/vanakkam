@@ -1,24 +1,19 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { usePlayerContext } from '../../context/PlayerContext';
 import './Navbar.css';
 
 const NAV_LINKS = [
   { to: '/', label: 'Home', end: true },
   { to: '/#shows', label: 'Shows', hash: true },
+  { to: '/#schedule', label: 'Schedule', hash: true },
   { to: '/podcasts', label: 'Podcasts' },
   { to: '/#contact', label: 'Contact', hash: true },
 ];
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const { live } = usePlayerContext();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -27,14 +22,24 @@ export function Navbar() {
     };
   }, [menuOpen]);
 
+  const isLive = live.status === 'playing' || live.status === 'loading';
+
   return (
-    <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+    <header className="navbar">
       <div className="navbar__inner container">
+        <button
+          type="button"
+          className={`navbar__toggle ${menuOpen ? 'navbar__toggle--active' : ''}`}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <span className="navbar__hamburger" />
+        </button>
+
         <a href="/" className="navbar__logo" aria-label="Vanakkam FM home">
           <img src="/logo.png" alt="" className="navbar__logo-img" />
-          <span className="navbar__logo-text">
-            Vanakkam <span className="highlight">FM</span>
-          </span>
+          <span className="navbar__logo-text">Vanakkam FM</span>
         </a>
 
         <nav className={`navbar__menu ${menuOpen ? 'navbar__menu--open' : ''}`}>
@@ -57,14 +62,9 @@ export function Navbar() {
           )}
         </nav>
 
-        <button
-          type="button"
-          className={`navbar__toggle ${menuOpen ? 'navbar__toggle--active' : ''}`}
-          aria-label="Toggle navigation menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((v) => !v)}
-        >
-          <span className="navbar__hamburger" />
+        <button type="button" className="navbar__listen" onClick={live.toggle}>
+          <span className={`navbar__listen-dot ${isLive ? 'navbar__listen-dot--live' : ''}`} />
+          {isLive ? 'Playing' : 'Listen Live'}
         </button>
       </div>
     </header>

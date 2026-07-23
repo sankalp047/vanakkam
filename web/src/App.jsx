@@ -20,10 +20,10 @@ function SiteLayout({ children }) {
   return (
     <>
       <Navbar />
-      <main style={{ flex: 1 }}>{children}</main>
+      <LiveStreamBar />
+      <main className="site-main">{children}</main>
       <Footer />
       <PodcastMiniPlayer />
-      <LiveStreamBar />
     </>
   );
 }

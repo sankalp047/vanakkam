@@ -1,5 +1,5 @@
 .podcasts-page {
-  padding-top: 7rem;
+  padding-top: var(--space-xl);
   min-height: 100svh;
 }
 

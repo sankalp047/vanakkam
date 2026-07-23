@@ -2,7 +2,7 @@
   min-height: 100svh;
   display: grid;
   place-items: center;
-  background: var(--gradient-night);
+  background: var(--color-chrome);
   padding: var(--space-md);
 }
 

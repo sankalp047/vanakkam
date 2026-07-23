@@ -1,6 +1,16 @@
 .contact-section {
-  padding-block: var(--space-3xl);
-  background: var(--color-bg);
+  padding-block: var(--space-2xl);
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
+
+.contact-section h2,
+.contact-section .highlight {
+  color: #fff;
+}
+
+.contact-section .highlight {
+  color: var(--color-primary-light);
 }
 
 .contact-grid {
@@ -11,9 +21,12 @@
 }
 
 .contact-info__desc {
-  max-width: 460px;
+  max-width: 46ch;
   margin-top: var(--space-sm);
   margin-bottom: var(--space-lg);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: rgba(241, 241, 234, 0.75);
 }
 
 .contact-info__list {
@@ -27,15 +40,20 @@
   flex-direction: column;
   gap: 2px;
   padding-bottom: var(--space-sm);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .contact-info__label {
-  font-size: 0.8rem;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--color-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
+}
+
+.contact-info__item > span:last-child {
+  color: var(--color-bg);
 }
 
 @media (max-width: 860px) {

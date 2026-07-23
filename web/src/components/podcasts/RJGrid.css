@@ -9,7 +9,7 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border-strong);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
@@ -38,26 +38,37 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: var(--space-md);
-  background: linear-gradient(180deg, transparent 40%, rgba(12, 10, 20, 0.95) 100%);
+  background: linear-gradient(180deg, transparent 40%, rgba(20, 17, 15, 0.94) 100%);
+  color: #fff;
 }
 
 .rj-card__time {
   align-self: flex-start;
-  padding: 0.3rem 0.7rem;
+  padding: 0.25rem 0.6rem;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.12);
-  font-size: 0.72rem;
-  font-weight: 600;
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   margin-bottom: var(--space-2xs);
 }
 
 .rj-card__name {
-  font-size: 1.2rem;
+  color: #fff;
+  font-size: 1.3rem;
 }
 
 .rj-card__show {
-  font-size: 0.85rem;
-  color: var(--color-secondary-light);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-secondary);
+  margin-top: 2px;
 }
 
 .rj-card__meta {
@@ -65,8 +76,13 @@
   align-items: center;
   gap: var(--space-2xs);
   padding: var(--space-sm) var(--space-md);
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border);
 }
 
 .rj-card__meta > span {
@@ -83,15 +99,17 @@
   height: 28px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border-strong);
   font-size: 0.8rem;
   font-style: italic;
-  font-family: Georgia, serif;
+  font-family: var(--font-serif);
+  color: var(--color-ink);
 }
 
 .rj-card__info:hover {
-  background: var(--color-surface-hover);
+  background: var(--color-ink);
+  color: #fff;
 }
 
 .rj-card__play-icon {
@@ -101,6 +119,10 @@
   height: 32px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--gradient-sunset);
-  color: #1a0a10;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.rj-card__play-icon:hover {
+  background: var(--color-primary-dark);
 }
