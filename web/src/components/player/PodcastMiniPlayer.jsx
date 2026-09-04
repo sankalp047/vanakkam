@@ -49,7 +49,7 @@ export function PodcastMiniPlayer() {
           <button type="button" className="podcast-bar__collapse" onClick={podcast.collapse} aria-label="Collapse player">
             ⌄
           </button>
-          <img src={artwork} alt="" className="podcast-bar__expanded-art" />
+          <img src={artwork} alt="" className="podcast-bar__expanded-art" decoding="async" />
           <h3 className="podcast-bar__expanded-title">{podcast.currentEpisode.title}</h3>
           <p className="podcast-bar__expanded-artist">{podcast.rj?.name}</p>
         </div>
@@ -62,7 +62,7 @@ export function PodcastMiniPlayer() {
           onClick={podcast.toggleExpanded}
           aria-label="Expand player"
         >
-          <img src={artwork} alt="" className="podcast-bar__art" />
+          <img src={artwork} alt="" className="podcast-bar__art" decoding="async" />
         </button>
 
         <div className="podcast-bar__meta">

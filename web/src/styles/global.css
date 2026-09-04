@@ -223,3 +223,23 @@ p {
 .section-header {
   margin-bottom: var(--space-xl);
 }
+
+/* Scroll performance: let the browser skip layout/paint for heavy sections
+   while they're far offscreen. contain-intrinsic-size reserves a plausible
+   height so the scrollbar doesn't jump as they come into view. Sections with
+   IntersectionObserver-driven animations (About counters, Advertise wave) are
+   deliberately left out so their triggers stay untouched. */
+.shows-section,
+.schedule-section,
+.bigfan {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Card artwork is painted as a background image; hint the compositor so the
+   hover lift stays on the GPU instead of repainting the image. */
+.show-card__image,
+.rj-card__image {
+  will-change: transform;
+  backface-visibility: hidden;
+}

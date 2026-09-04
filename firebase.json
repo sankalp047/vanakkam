@@ -33,6 +33,38 @@
         "source": "**",
         "destination": "/index.html"
       }
+    ],
+    "headers": [
+      {
+        "comment": "Default: every SPA route is served the index.html shell via rewrite, so it must always revalidate or deploys take up to an hour to appear. The asset rules below are listed after this one deliberately \u2014 for a given header key, the last matching rule wins.",
+        "source": "**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "comment": "Vite emits content-hashed filenames here, so these can be cached forever.",
+        "source": "/assets/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "comment": "Static imagery and fonts \u2014 cached for a week so scrolling never refetches them.",
+        "source": "**/*.@(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=604800"
+          }
+        ]
+      }
     ]
   }
 }

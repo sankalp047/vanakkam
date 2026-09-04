@@ -69,7 +69,7 @@ export function AdCarousel() {
       <span className="ad-box__tag">Ad</span>
 
       {image ? (
-        <img src={image} alt={slide.title || 'Sponsor'} className="ad-box__img" />
+        <img src={image} alt={slide.title || 'Sponsor'} className="ad-box__img" loading="lazy" decoding="async" />
       ) : (
         <div className="ad-box__placeholder">
           <span className="ad-box__ph-kicker">Sponsored</span>

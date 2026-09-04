@@ -134,7 +134,7 @@ function ShowEditor({ show }) {
         </button>
 
         <button type="button" className="show-editor__summary" onClick={() => setOpen((v) => !v)}>
-          <img src={show.image} alt="" className="show-editor__thumb" />
+          <img src={show.image} alt="" className="show-editor__thumb" loading="lazy" decoding="async" />
           <span className="show-editor__head-text">
             <strong>{show.name}</strong>
             <span>
@@ -154,7 +154,7 @@ function ShowEditor({ show }) {
       {open && (
         <form className="show-editor__body" onSubmit={save}>
           <div className="show-editor__image-row">
-            <img src={show.image} alt="" className="show-editor__preview" />
+            <img src={show.image} alt="" className="show-editor__preview" loading="lazy" decoding="async" />
             <div className="show-editor__image-actions">
               <label className="admin-field">
                 <span>Replace image</span>

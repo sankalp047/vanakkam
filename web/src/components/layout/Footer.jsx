@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container footer__main">
         <div className="footer__brand">
           <div className="footer__logo">
-            <img src="/logo.png" alt="Vanakkam FM" />
+            <img src="/logo.png" alt="Vanakkam FM" loading="lazy" decoding="async" />
             <div>
               <div className="footer__logo-text">
                 Vanakkam <span className="highlight">FM</span>

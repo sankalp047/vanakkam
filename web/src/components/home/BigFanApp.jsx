@@ -9,10 +9,10 @@ export function BigFanApp() {
       <div className="container bigfan__inner">
         <div className="bigfan__phones" aria-hidden="true">
           <div className="bigfan__phone bigfan__phone--back">
-            <img src="/bigfan/screenshot-2.jpg" alt="" />
+            <img src="/bigfan/screenshot-2.jpg" alt="" loading="lazy" decoding="async" />
           </div>
           <div className="bigfan__phone bigfan__phone--front">
-            <img src="/bigfan/screenshot-1.jpg" alt="" />
+            <img src="/bigfan/screenshot-1.jpg" alt="" loading="lazy" decoding="async" />
           </div>
         </div>
 

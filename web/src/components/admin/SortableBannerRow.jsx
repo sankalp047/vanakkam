@@ -18,7 +18,7 @@ export function SortableBannerRow({ banner, onToggleActive, onDelete }) {
         </button>
       </td>
       <td>
-        <img src={banner.image16x9?.url} alt="" className="banner-thumb" />
+        <img src={banner.image16x9?.url} alt="" className="banner-thumb" loading="lazy" decoding="async" />
       </td>
       <td>{banner.title}</td>
       <td>

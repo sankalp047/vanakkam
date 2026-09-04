@@ -17,7 +17,7 @@ export function EpisodesPanel({ rj, onClose }) {
     <div className="episodes-panel-overlay" onClick={onClose}>
       <aside className="episodes-panel" onClick={(e) => e.stopPropagation()}>
         <div className="episodes-panel__header">
-          <img src={rj.image} alt="" className="episodes-panel__image" />
+          <img src={rj.image} alt="" className="episodes-panel__image" loading="lazy" decoding="async" />
           <div>
             <h3>{rj.name}</h3>
             <p>{rj.show}</p>

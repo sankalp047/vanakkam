@@ -9,7 +9,7 @@ export function RJBioModal({ rj, onClose }) {
         <button type="button" className="rj-bio-modal__close" onClick={onClose} aria-label="Close">
           ✕
         </button>
-        <img src={rj.image} alt="" className="rj-bio-modal__image" />
+        <img src={rj.image} alt="" className="rj-bio-modal__image" loading="lazy" decoding="async" />
         <h3>{rj.name}</h3>
         <p className="rj-bio-modal__show">{rj.show}</p>
         <p className="rj-bio-modal__schedule">

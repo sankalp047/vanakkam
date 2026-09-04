@@ -1,0 +1,42 @@
+# Render Blueprint for the Vanakkam FM static site.
+#
+# NOTE: Render only applies this file automatically for Blueprint-managed
+# services. The existing `vanakkam-fm` site was created manually through the
+# dashboard, so for that service the same rewrite/headers must be set under
+# Settings → Redirects/Rewrites and Settings → Headers. This file keeps the
+# intended configuration in version control either way.
+services:
+  - type: web
+    name: vanakkam-fm
+    runtime: static
+    rootDir: web
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+
+    routes:
+      # SPA fallback so client-side routes survive refresh / direct links.
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+    headers:
+      # Vite emits content-hashed filenames, so these are safe to cache forever.
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+
+      # Static imagery — cached for a week so scrolling never refetches it.
+      - path: /rj/*
+        name: Cache-Control
+        value: public, max-age=604800
+      - path: /bigfan/*
+        name: Cache-Control
+        value: public, max-age=604800
+      - path: /logo.png
+        name: Cache-Control
+        value: public, max-age=604800
+
+      # The SPA shell must always revalidate so deploys are picked up at once.
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache
