@@ -3,16 +3,15 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { usePlayerContext } from '../../context/PlayerContext';
 import { useOnAirNow } from '../../hooks/useOnAirNow';
-import { RJ_ROSTER } from '../../lib/rjRoster';
+import { useRoster } from '../../hooks/useRoster';
 import './Hero.css';
 
 gsap.registerPlugin(useGSAP);
 
-const FALLBACK_FEATURE = RJ_ROSTER[0];
-
 export function Hero() {
   const { live } = usePlayerContext();
   const onAir = useOnAirNow();
+  const { roster } = useRoster();
   const rootRef = useRef(null);
 
   useGSAP(
@@ -35,7 +34,7 @@ export function Hero() {
     { scope: rootRef },
   );
 
-  const feature = onAir || FALLBACK_FEATURE;
+  const feature = onAir || roster[0];
   const isPlaying = live.status === 'playing';
 
   return (

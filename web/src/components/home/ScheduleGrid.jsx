@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RJ_ROSTER } from '../../lib/rjRoster';
+import { useRoster } from '../../hooks/useRoster';
 import { buildWeeklySchedule, WEEKDAY_LABELS } from '../../lib/schedule';
 import { RJBioModal } from '../shared/RJBioModal';
 import './ScheduleGrid.css';
@@ -7,7 +7,8 @@ import './ScheduleGrid.css';
 const TODAY_INDEX = new Date().getDay();
 
 export function ScheduleGrid() {
-  const { byDay, unscheduled } = buildWeeklySchedule(RJ_ROSTER);
+  const { roster } = useRoster();
+  const { byDay, unscheduled } = buildWeeklySchedule(roster);
   const [selectedRj, setSelectedRj] = useState(null);
 
   return (

@@ -15,7 +15,10 @@ export function PodcastMiniPlayer() {
 
   // When live radio takes over (controlled from the top ON AIR bar), slide the
   // podcast player down out of the way instead of leaving a stale episode bar.
-  const liveActive = live.status === 'playing' || live.status === 'loading';
+  // Never hide it while the podcast itself is playing/loading — otherwise a
+  // transient live state could bury the bar the visitor just asked for.
+  const podcastActive = podcast.status === 'playing' || podcast.status === 'loading';
+  const liveActive = !podcastActive && (live.status === 'playing' || live.status === 'loading');
 
   const progress = podcast.duration ? (podcast.currentTime / podcast.duration) * 100 : 0;
   const artwork = podcast.currentEpisode.image || podcast.rj?.image || '/logo.png';

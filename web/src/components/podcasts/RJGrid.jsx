@@ -1,23 +1,8 @@
-import { RJ_ROSTER } from '../../lib/rjRoster';
+import { mergeRoster } from '../../lib/rosterMerge';
 import './RJGrid.css';
 
-function mergeRoster(rosterEntry, podcastDoc) {
-  return {
-    slug: rosterEntry.slug,
-    name: rosterEntry.name,
-    show: rosterEntry.show,
-    time: rosterEntry.time,
-    days: rosterEntry.days,
-    bio: rosterEntry.bio,
-    image: (podcastDoc && (podcastDoc.imageOverride || podcastDoc.image)) || rosterEntry.image,
-    episodes: (podcastDoc && podcastDoc.episodes) || [],
-    lastSyncStatus: podcastDoc && podcastDoc.lastSyncStatus,
-  };
-}
-
 export function RJGrid({ podcasts, onSelect, onShowBio }) {
-  const bySlug = new Map(podcasts.map((p) => [p.slug, p]));
-  const merged = RJ_ROSTER.map((rosterEntry) => mergeRoster(rosterEntry, bySlug.get(rosterEntry.slug)));
+  const merged = mergeRoster(podcasts);
 
   return (
     <div className="rj-grid">

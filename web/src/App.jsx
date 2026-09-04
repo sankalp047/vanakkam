@@ -15,6 +15,7 @@ import { AdminLoginPage } from './pages/admin/AdminLoginPage';
 import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
 import { AdminBannersPage } from './pages/admin/AdminBannersPage';
 import { AdminPromoPage } from './pages/admin/AdminPromoPage';
+import { AdminShowsPage } from './pages/admin/AdminShowsPage';
 import { AdminPodcastsPage } from './pages/admin/AdminPodcastsPage';
 import { AdminInboxPage } from './pages/admin/AdminInboxPage';
 
@@ -45,6 +46,7 @@ export default function App() {
               <Route index element={<AdminDashboardPage />} />
               <Route path="banners" element={<AdminBannersPage />} />
               <Route path="promo" element={<AdminPromoPage />} />
+              <Route path="shows" element={<AdminShowsPage />} />
               <Route path="podcasts" element={<AdminPodcastsPage />} />
               <Route path="inbox" element={<AdminInboxPage />} />
             </Route>

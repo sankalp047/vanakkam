@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { RJ_ROSTER } from '../../lib/rjRoster';
+import { useRoster } from '../../hooks/useRoster';
 import './ShowsCarousel.css';
 
 export function ShowsCarousel() {
   const trackRef = useRef(null);
   const [activeDot, setActiveDot] = useState(0);
-  const dotCount = RJ_ROSTER.length;
+  const { roster } = useRoster();
+  const dotCount = roster.length;
 
   const updateActiveDot = useCallback(() => {
     const track = trackRef.current;
@@ -55,7 +56,7 @@ export function ShowsCarousel() {
 
         <div className="shows-carousel">
           <div className="show-track" ref={trackRef}>
-            {RJ_ROSTER.map((rj) => (
+            {roster.map((rj) => (
               <article className="show-card" key={rj.slug}>
                 <div className="show-card__image" style={{ backgroundImage: `url(${rj.image})` }}>
                   <div className="show-card__overlay">

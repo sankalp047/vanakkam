@@ -17,6 +17,13 @@ service firebase.storage {
       allow write: if isAdmin();
     }
 
+    // RJ / show artwork uploaded from the admin dashboard — public read
+    // (rendered across the site), admin-only writes.
+    match /rj-images/{slug}/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
     // Default deny for anything else in the bucket.
     match /{allPaths=**} {
       allow read, write: if false;

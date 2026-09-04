@@ -69,7 +69,11 @@ async function syncOneFeed(feed, db) {
   const docRef = db.collection("podcasts").doc(feed.slug);
 
   try {
-    const response = await fetch(feed.url);
+    // The station can repoint a show's feed from the admin dashboard; that
+    // override wins over the built-in URL.
+    const preSnap = await docRef.get();
+    const feedUrl = (preSnap.exists && preSnap.data().feedUrlOverride) || feed.url;
+    const response = await fetch(feedUrl);
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
@@ -82,8 +86,7 @@ async function syncOneFeed(feed, db) {
     const items = Array.isArray(channel.items) ? channel.items : [];
     const freshEpisodes = items.map(normalizeEpisode);
 
-    const existingSnap = await docRef.get();
-    const existing = existingSnap.exists ? existingSnap.data() : null;
+    const existing = preSnap.exists ? preSnap.data() : null;
     const episodes = mergeEpisodes(existing && existing.episodes, freshEpisodes);
 
     return {
@@ -92,7 +95,7 @@ async function syncOneFeed(feed, db) {
       data: {
         slug: feed.slug,
         name: feed.name,
-        feedUrl: feed.url,
+        feedUrl,
         channelTitle: title,
         description: channel.description || "",
         timeSlot: timeMatch ? timeMatch[0] : ((existing && existing.timeSlot) || null),

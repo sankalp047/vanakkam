@@ -15,6 +15,9 @@ const INTERACTION_EVENTS = ['pointerdown', 'keydown', 'touchstart'];
  */
 export function useLiveStreamPlayer() {
   const audioRef = useRef(null);
+  // Lets callers tear down the pending "start on first interaction" autoplay
+  // fallback the moment the visitor makes an explicit playback choice.
+  const cancelAutoplayRef = useRef(() => {});
   const [status, setStatus] = useState('idle'); // idle | loading | playing | paused | error
 
   useEffect(() => {
@@ -56,12 +59,14 @@ export function useLiveStreamPlayer() {
         cleanupInteractionListeners = () => {
           INTERACTION_EVENTS.forEach((evt) => document.removeEventListener(evt, startOnInteraction));
         };
+        cancelAutoplayRef.current = cleanupInteractionListeners;
       });
     }
 
     return () => {
       cancelled = true;
       cleanupInteractionListeners();
+      cancelAutoplayRef.current = () => {};
       audio.removeEventListener('playing', onPlaying);
       audio.removeEventListener('pause', onPause);
       audio.removeEventListener('waiting', onWaiting);
@@ -72,20 +77,30 @@ export function useLiveStreamPlayer() {
     };
   }, []);
 
+  // Once the visitor makes any deliberate playback choice, the pending
+  // autoplay fallback must not fire — otherwise a click meant for the podcast
+  // player would also kick off the live stream (its pointerdown lands first).
+  const cancelPendingAutoplay = useCallback(() => {
+    cancelAutoplayRef.current();
+    cancelAutoplayRef.current = () => {};
+  }, []);
+
   const play = useCallback(async () => {
     const audio = audioRef.current;
     if (!audio) return;
+    cancelPendingAutoplay();
     try {
       setStatus('loading');
       await audio.play();
     } catch {
       setStatus('paused');
     }
-  }, []);
+  }, [cancelPendingAutoplay]);
 
   const pause = useCallback(() => {
+    cancelPendingAutoplay();
     audioRef.current?.pause();
-  }, []);
+  }, [cancelPendingAutoplay]);
 
   const toggle = useCallback(() => {
     if (!audioRef.current) return;
@@ -96,5 +111,5 @@ export function useLiveStreamPlayer() {
     }
   }, [play, pause]);
 
-  return { status, play, pause, toggle };
+  return { status, play, pause, toggle, cancelPendingAutoplay };
 }

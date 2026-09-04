@@ -6,7 +6,8 @@ const LINKS = [
   { to: '/admin', label: 'Dashboard', end: true },
   { to: '/admin/banners', label: 'Banners' },
   { to: '/admin/promo', label: 'Promo Bar' },
-  { to: '/admin/podcasts', label: 'Podcasts' },
+  { to: '/admin/shows', label: 'Shows & RJs' },
+  { to: '/admin/podcasts', label: 'Sync Status' },
   { to: '/admin/inbox', label: 'Inbox' },
 ];
 

@@ -29,6 +29,10 @@ export function PlayerProvider({ children }) {
 
   const playEpisode = useCallback(
     (rj, episodeOrIndex) => {
+      // Starting a podcast is an explicit choice — make sure the live
+      // stream's pending autoplay-on-first-interaction can't also fire and
+      // steal playback out from under it.
+      live.cancelPendingAutoplay();
       if (live.status === 'playing' || live.status === 'loading') {
         live.pause();
       }
@@ -39,6 +43,7 @@ export function PlayerProvider({ children }) {
 
   const togglePodcast = useCallback(() => {
     if (podcast.status === 'idle') return;
+    live.cancelPendingAutoplay();
     if (live.status === 'playing' || live.status === 'loading') {
       live.pause();
     }
