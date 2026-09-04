@@ -60,19 +60,15 @@ function mergeEpisodes(existingEpisodes, freshEpisodes) {
 }
 
 /**
- * Fetches and normalizes a single RJ's StreamGuys feed.
- * @param {{slug: string, name: string, url: string}} feed Feed descriptor.
- * @param {admin.firestore.Firestore} db Firestore instance.
+ * Fetches and normalizes a single show's feed.
+ * @param {{slug: string, name: string, url: string, existing: ?object}} feed
+ *   Feed descriptor, including the show's current Firestore data (if any).
  * @return {Promise<{slug: string, ok: boolean, data: object}>} Sync result.
  */
-async function syncOneFeed(feed, db) {
-  const docRef = db.collection("podcasts").doc(feed.slug);
-
+async function syncOneFeed(feed) {
   try {
-    // The station can repoint a show's feed from the admin dashboard; that
-    // override wins over the built-in URL.
-    const preSnap = await docRef.get();
-    const feedUrl = (preSnap.exists && preSnap.data().feedUrlOverride) || feed.url;
+    const existing = feed.existing || null;
+    const feedUrl = feed.url;
     const response = await fetch(feedUrl);
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
@@ -86,7 +82,6 @@ async function syncOneFeed(feed, db) {
     const items = Array.isArray(channel.items) ? channel.items : [];
     const freshEpisodes = items.map(normalizeEpisode);
 
-    const existing = preSnap.exists ? preSnap.data() : null;
     const episodes = mergeEpisodes(existing && existing.episodes, freshEpisodes);
 
     return {
@@ -125,23 +120,67 @@ async function syncOneFeed(feed, db) {
 }
 
 /**
- * Fetches all RJ feeds and upserts them into Firestore in one batch.
+ * Builds the list of feeds to sync: built-in shows plus any added or
+ * repointed from the admin dashboard, minus hidden ones and ones with no
+ * feed URL.
+ * @param {admin.firestore.Firestore} db Firestore instance.
+ * @return {Promise<Array<object>>} Feed descriptors to sync.
+ */
+async function resolveFeeds(db) {
+  const snapshot = await db.collection("podcasts").get();
+  const docsBySlug = new Map();
+  snapshot.forEach((d) => docsBySlug.set(d.id, d.data()));
+
+  const feeds = new Map();
+
+  // Built-in shows first, so they keep their canonical name/URL defaults.
+  RJ_FEEDS.forEach((feed) => {
+    feeds.set(feed.slug, {...feed, existing: docsBySlug.get(feed.slug) || null});
+  });
+
+  // Then anything the dashboard knows about: an edited feed URL wins, and
+  // shows added from the dashboard get picked up automatically.
+  docsBySlug.forEach((data, slug) => {
+    if (data.hidden === true) {
+      feeds.delete(slug);
+      return;
+    }
+    const url = data.feedUrlOverride || data.feedUrl || (feeds.get(slug) || {}).url;
+    if (!url) {
+      // A dashboard-added show with no feed yet — nothing to sync.
+      feeds.delete(slug);
+      return;
+    }
+    feeds.set(slug, {
+      slug,
+      name: data.nameOverride || data.name || slug,
+      url,
+      existing: data,
+    });
+  });
+
+  return [...feeds.values()];
+}
+
+/**
+ * Fetches all show feeds and upserts them into Firestore in one batch.
  * Shared by the scheduled function and the one-off backfill script so the
  * two can never drift.
  * @param {admin.firestore.Firestore} db Firestore instance.
  * @return {Promise<{okCount: number, errorCount: number}>} Sync summary.
  */
 async function runPodcastSync(db) {
-  console.log("🎙️ podcastSync: starting sync of", RJ_FEEDS.length, "RJ feeds");
+  const activeFeeds = await resolveFeeds(db);
+  console.log("🎙️ podcastSync: starting sync of", activeFeeds.length, "feeds");
 
-  const results = await Promise.allSettled(RJ_FEEDS.map((feed) => syncOneFeed(feed, db)));
+  const results = await Promise.allSettled(activeFeeds.map((feed) => syncOneFeed(feed)));
 
   const batch = db.batch();
   let okCount = 0;
   let errorCount = 0;
 
   results.forEach((result, i) => {
-    const feed = RJ_FEEDS[i];
+    const feed = activeFeeds[i];
     const docRef = db.collection("podcasts").doc(feed.slug);
 
     if (result.status === "fulfilled") {
