@@ -1,8 +1,7 @@
-import { mergeRoster } from '../../lib/rosterMerge';
 import './RJGrid.css';
 
-export function RJGrid({ podcasts, onSelect, onShowBio }) {
-  const merged = mergeRoster(podcasts);
+export function RJGrid({ shows, onSelect, onShowBio }) {
+  const merged = shows || [];
 
   return (
     <div className="rj-grid">

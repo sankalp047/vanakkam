@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import './RJBioModal.css';
 
-export function RJBioModal({ rj, onClose }) {
+export function RJBioModal({ rj, onClose, showListenLink = false }) {
   if (!rj) return null;
 
   return (
@@ -16,6 +17,15 @@ export function RJBioModal({ rj, onClose }) {
           {rj.days} · {rj.time}
         </p>
         {rj.bio && <p className="rj-bio-modal__bio">{rj.bio}</p>}
+        {showListenLink && (
+          <Link
+            to={`/podcasts?show=${encodeURIComponent(rj.slug)}`}
+            className="btn btn-primary rj-bio-modal__listen"
+            onClick={onClose}
+          >
+            ▶ Listen to episodes
+          </Link>
+        )}
       </div>
     </div>
   );

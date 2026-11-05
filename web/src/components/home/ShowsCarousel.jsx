@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useRoster } from '../../hooks/useRoster';
 import './ShowsCarousel.css';
 
@@ -58,13 +59,20 @@ export function ShowsCarousel() {
           <div className="show-track" ref={trackRef}>
             {roster.map((rj) => (
               <article className="show-card" key={rj.slug}>
-                {/* Poster artwork already carries the name, show and times. */}
-                <div
-                  className="show-card__image"
-                  style={{ backgroundImage: `url(${rj.image})` }}
-                  role="img"
-                  aria-label={`${rj.name} — ${rj.show}, ${rj.time}, ${rj.days}`}
-                />
+                {/* Poster artwork already carries the name, show and times.
+                    The card links straight to this show's episodes. */}
+                <Link
+                  to={`/podcasts?show=${encodeURIComponent(rj.slug)}`}
+                  className="show-card__link"
+                  aria-label={`${rj.name} — ${rj.show}, ${rj.time}, ${rj.days}. Listen to episodes`}
+                >
+                  <div
+                    className="show-card__image"
+                    style={{ backgroundImage: `url(${rj.image})` }}
+                    role="img"
+                    aria-hidden="true"
+                  />
+                </Link>
               </article>
             ))}
           </div>

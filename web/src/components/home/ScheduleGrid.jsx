@@ -61,7 +61,7 @@ export function ScheduleGrid() {
         )}
       </div>
 
-      <RJBioModal rj={selectedRj} onClose={() => setSelectedRj(null)} />
+      <RJBioModal rj={selectedRj} onClose={() => setSelectedRj(null)} showListenLink />
     </section>
   );
 }

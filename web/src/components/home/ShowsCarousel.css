@@ -97,3 +97,7 @@
     display: none;
   }
 }
+
+.show-card__link {
+  display: block;
+}
