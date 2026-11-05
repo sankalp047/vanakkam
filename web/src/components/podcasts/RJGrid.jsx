@@ -9,13 +9,14 @@ export function RJGrid({ podcasts, onSelect, onShowBio }) {
       {merged.map((rj) => (
         <div key={rj.slug} className="rj-card">
           <button type="button" className="rj-card__main" onClick={() => onSelect(rj)}>
-            <div className="rj-card__image" style={{ backgroundImage: `url(${rj.image})` }}>
-              <div className="rj-card__overlay">
-                <span className="rj-card__time">{rj.time}</span>
-                <h3 className="rj-card__name">{rj.name}</h3>
-                <p className="rj-card__show">{rj.show}</p>
-              </div>
-            </div>
+            {/* The station's poster artwork already has the RJ name, show
+                title and time printed on it, so no text overlay here. */}
+            <div
+              className="rj-card__image"
+              style={{ backgroundImage: `url(${rj.image})` }}
+              role="img"
+              aria-label={`${rj.name} — ${rj.show}, ${rj.time}`}
+            />
           </button>
           <div className="rj-card__meta">
             <span>{rj.episodes.length ? `${rj.episodes.length} Episodes` : 'Coming soon'}</span>

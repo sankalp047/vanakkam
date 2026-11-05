@@ -60,18 +60,20 @@ export function Hero() {
           </div>
         </div>
 
-        <button type="button" className="hero__feature" onClick={live.toggle} aria-label="Listen to what's on air now">
+        <button
+          type="button"
+          className="hero__feature"
+          onClick={live.toggle}
+          aria-label={`Listen live — ${feature.show} with ${feature.name}, ${feature.time}`}
+        >
           <div className="hero__feature-image" style={{ backgroundImage: `url(${feature.image})` }}>
             <span className="hero__feature-badge">
               <span className="hero__feature-dot" />
               {onAir ? 'On Air Now' : 'Up Next'}
             </span>
+            {/* Show name, host and times are already printed on the poster
+                artwork — only the play affordance is added here. */}
             <div className="hero__feature-overlay">
-              <span className="hero__feature-kicker">{feature.days}</span>
-              <h2 className="hero__feature-show">{feature.show}</h2>
-              <p className="hero__feature-host">
-                with {feature.name} · {feature.time}
-              </p>
               <span className="hero__feature-play">{isPlaying ? '❚❚ Playing' : '▶ Tune In'}</span>
             </div>
           </div>

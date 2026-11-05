@@ -41,53 +41,6 @@
   transform: translateY(-6px);
 }
 
-.show-card__overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: var(--space-md);
-  background: linear-gradient(180deg, transparent 35%, rgba(20, 17, 15, 0.92) 100%);
-  color: #fff;
-}
-
-.show-card__time {
-  align-self: flex-start;
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--radius-full);
-  background: var(--color-primary);
-  color: #fff;
-  font-family: var(--font-heading);
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-2xs);
-}
-
-.show-card__title {
-  color: #fff;
-  font-size: 1.5rem;
-  line-height: 0.95;
-}
-
-.show-card__host {
-  color: var(--color-secondary);
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-top: 4px;
-}
-
-.show-card__days {
-  margin-top: var(--space-2xs);
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
 .shows-carousel__nav {
   position: absolute;
   top: 38%;

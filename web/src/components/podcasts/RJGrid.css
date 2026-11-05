@@ -26,49 +26,10 @@
 
 .rj-card__image {
   position: relative;
-  aspect-ratio: 1;
+  /* Posters are 4:5 — match it so the baked-in text is never cropped. */
+  aspect-ratio: 4 / 5;
   background-size: cover;
   background-position: center;
-}
-
-.rj-card__overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: var(--space-md);
-  background: linear-gradient(180deg, transparent 40%, rgba(20, 17, 15, 0.94) 100%);
-  color: #fff;
-}
-
-.rj-card__time {
-  align-self: flex-start;
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--radius-full);
-  background: var(--color-primary);
-  color: #fff;
-  font-family: var(--font-heading);
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-2xs);
-}
-
-.rj-card__name {
-  color: #fff;
-  font-size: 1.3rem;
-}
-
-.rj-card__show {
-  font-family: var(--font-heading);
-  font-size: 0.78rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--color-secondary);
-  margin-top: 2px;
 }
 
 .rj-card__meta {

@@ -58,14 +58,13 @@ export function ShowsCarousel() {
           <div className="show-track" ref={trackRef}>
             {roster.map((rj) => (
               <article className="show-card" key={rj.slug}>
-                <div className="show-card__image" style={{ backgroundImage: `url(${rj.image})` }}>
-                  <div className="show-card__overlay">
-                    <span className="show-card__time">{rj.time}</span>
-                    <h3 className="show-card__title">{rj.name}</h3>
-                    <p className="show-card__host">{rj.show}</p>
-                    <span className="show-card__days">{rj.days}</span>
-                  </div>
-                </div>
+                {/* Poster artwork already carries the name, show and times. */}
+                <div
+                  className="show-card__image"
+                  style={{ backgroundImage: `url(${rj.image})` }}
+                  role="img"
+                  aria-label={`${rj.name} — ${rj.show}, ${rj.time}, ${rj.days}`}
+                />
               </article>
             ))}
           </div>
