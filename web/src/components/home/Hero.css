@@ -111,34 +111,16 @@
 .hero__feature-overlay {
   position: absolute;
   inset: auto 0 0 0;
-  padding: var(--space-lg) var(--space-md) var(--space-md);
-  background: linear-gradient(180deg, transparent 0%, rgba(20, 17, 15, 0.92) 75%);
+  padding: var(--space-md);
+  /* No scrim: the poster's own name/time bar lives down here, and a
+     gradient over it just looked like the image was cut off. The button
+     carries its own contrast instead. */
   color: #fff;
-}
-
-.hero__feature-kicker {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-secondary);
-}
-
-.hero__feature-show {
-  color: #fff;
-  font-size: clamp(1.6rem, 3vw, 2.3rem);
-  margin: var(--space-3xs) 0;
-  line-height: 0.98;
-}
-
-.hero__feature-host {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.9rem;
 }
 
 .hero__feature-play {
   display: inline-block;
+  box-shadow: 0 2px 10px rgba(20, 17, 15, 0.45);
   margin-top: var(--space-sm);
   padding: 0.5rem 1.1rem;
   background: #fff;
